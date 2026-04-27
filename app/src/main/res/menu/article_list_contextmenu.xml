@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ArticleList_ContextMenu_Lagerbestand"
+        android:icon="@drawable/add_circle_24px"
+        android:iconTint="@color/Text_Color"
+        android:iconTintMode="add"
+        android:title="@string/ArticleList_Lagerbestand" />
+
+    <item android:id="@+id/ArticleList_ContextMenu_AufEinkaufszettel"
+        android:title="@string/ArticleList_ToShoppingList"
+        android:icon="@drawable/filter_alt_24px" />
+
+</menu>

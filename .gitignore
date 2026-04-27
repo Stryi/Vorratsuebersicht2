@@ -1,0 +1,45 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
+# IntelliJ
+*.iml
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
+/.vs/Vorratsuebersicht-Kotlin/v17/.wsuo
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/57e5aba5-02ab-4f89-84bb-80dba63dde49.vsidx
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/264405b4-ad09-4a2a-9209-8aec498e5ed2.vsidx
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/a1050ac8-9b0a-4b3f-83e2-d95d4d2c99a2.vsidx
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/c7963537-7698-43a2-a3ac-fca79579a79b.vsidx
+/.vs/Vorratsuebersicht-Kotlin/v17/DocumentLayout.backup.json
+/.vs/Vorratsuebersicht-Kotlin/v17/DocumentLayout.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/2d488442-1e0c-4528-954f-e751ccc7873d.vsidx
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/3674709f-91a9-4091-8677-24634cb8238d.vsidx
+/.vs/Vorratsuebersicht-Kotlin/FileContentIndex/f925c0f4-3143-47d0-ad58-e4482db22072.vsidx
