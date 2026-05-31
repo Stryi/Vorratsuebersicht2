@@ -111,6 +111,7 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.SettingsButtonCompress.setOnClickListener { this.compressDatabase()  }
         binding.SettingsButtonRepair.setOnClickListener   { this.repairDatabase()    }
+        binding.SettingsButtonMove.setOnClickListener     { this.moveDatabase()      }
 
         binding.SettingsButtonDatabaseNew.setOnClickListener    { this.buttonNewDbClick()}
         binding.SettingsButtonDatabaseImport.setOnClickListener { this.buttonImportDbClick() }
@@ -522,6 +523,87 @@ class SettingsActivity : AppCompatActivity() {
                 Tools.showMessage(this, checkResult ?: "Keine Information")
             }
         }.start()
+    }
+
+    fun moveDatabase() {
+        val currentPath = Database.getDatabasePath() ?: return
+        val currentFile = File(currentPath)
+        val storageRoots = AndroidDatabase.getStorageRoots(this)
+
+        if (storageRoots.size < 2) {
+            Tools.showWarning(this, "Keine SD-Karte gefunden oder nur ein Speicher verfügbar.")
+            return
+        }
+
+        val isOnSD = AndroidDatabase.isOnSDCard(this, currentFile)
+
+        // Find which root we are currently on
+        val currentRootIndex = storageRoots.indexOfFirst { root ->
+            try {
+                currentFile.canonicalPath.startsWith(root.canonicalPath)
+            } catch (_: Exception) {
+                false
+            }
+        }
+
+        if (currentRootIndex == -1) {
+            Tools.showWarning(this, "Speicherort der Datenbank konnte nicht ermittelt werden.")
+            return
+        }
+
+        // Toggle between roots (assuming 0 is internal and 1 is SD)
+        val targetRootIndex = if (currentRootIndex == 0) 1 else 0
+        val targetRoot = storageRoots[targetRootIndex]
+
+        val fromText = resources.getString(if (currentRootIndex == 0) R.string.Settings_InternalStorage else R.string.Settings_SdCard)
+        val toText = resources.getString(if (targetRootIndex == 0) R.string.Settings_InternalStorage else R.string.Settings_SdCard)
+
+        val message = resources.getString(R.string.Settings_DatabaseMove_ConfirmMessage, fromText, toText)
+
+        val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+        builder.setTitle(R.string.Settings_DatabaseMove)
+        builder.setMessage(message)
+        builder.setNegativeButton(R.string.App_Cancel) { _, _ -> }
+        builder.setPositiveButton(R.string.App_Ok) { _, _ ->
+            performMoveDatabase(currentFile, targetRoot)
+        }
+        builder.show()
+    }
+
+    private fun performMoveDatabase(currentFile: File, targetDir: File) {
+        val targetFile = File(targetDir, currentFile.name)
+
+        if (targetFile.exists()) {
+            Tools.showWarning(this, "Die Datei '${currentFile.name}' existiert bereits am Zielort.")
+            return
+        }
+
+        try {
+            Database.closeDatabase()
+
+            currentFile.inputStream().use { input ->
+                targetFile.outputStream().use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            if (targetFile.exists() && targetFile.length() == currentFile.length()) {
+                currentFile.delete()
+                val error = Database.init(targetFile.absolutePath)
+                if (error == null) {
+                    showDatabaseInfo()
+                    Tools.showMessage(this, "Datenbank wurde verschoben.")
+                } else {
+                    Tools.showWarning(this, "Fehler beim Öffnen der verschobenen Datenbank: $error")
+                }
+            } else {
+                Database.init(currentFile.absolutePath)
+                Tools.showWarning(this, "Fehler beim Kopieren der Datenbank.")
+            }
+        } catch (e: Exception) {
+            Database.init(currentFile.absolutePath)
+            Tools.showException(this, e, null, "Fehler beim Verschieben der Datenbank.")
+        }
     }
 
     fun buttonNewDbClick()
