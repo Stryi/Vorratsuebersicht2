@@ -80,7 +80,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         val storageAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, this.storages)
         binding.StorageItemQuantityStorageText.setAdapter(storageAdapter)
         binding.StorageItemQuantityStorageText.threshold = 1
-        binding.StorageItemQuantityStorageText.setText(this.article.storageName)
+        binding.StorageItemQuantityStorageText.setText(this.article.storageName?.trimEnd())
 
         binding.StorageItemQuantityAddArticle.setOnClickListener { this.addArticle() }
 
@@ -469,7 +469,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
     }
 
     fun addArticle() {
-        val storageName = binding.StorageItemQuantityStorageText.text.toString()
+        val storageName = binding.StorageItemQuantityStorageText.text.toString().trimEnd()
 
         val storageItem = StorageItem()
         storageItem.articleId   = this.article.articleId
@@ -494,7 +494,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
     }
 
     private fun addArticleWithQuantity() {
-        val storageName = binding.StorageItemQuantityStorageText.text.toString()
+        val storageName = binding.StorageItemQuantityStorageText.text.toString().trimEnd()
 
         val storageItem = StorageItem()
         storageItem.articleId = this.article.articleId
@@ -511,4 +511,3 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
     }
 }
-
