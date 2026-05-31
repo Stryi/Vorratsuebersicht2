@@ -284,20 +284,6 @@
                 android:textAllCaps="false"
                 android:gravity="start|center_vertical" />
 
-            <Button
-                android:id="@+id/SettingsButton_Move"
-                android:text="@string/Settings_DatabaseMove"
-                android:textColor="#000000"
-                android:drawableLeft="@drawable/database_24px"
-                android:drawableTint="#444444"
-                android:backgroundTint="#CCCCCC"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:drawablePadding="5dp"
-                android:textAllCaps="false"
-                android:gravity="start|center_vertical" />
-
             <TextView
                 android:text="@string/Settings_DatabaseManagement"
                 android:textSize="20sp"
@@ -347,6 +333,21 @@
                 android:drawablePadding="5dp"
                 android:textAllCaps="false"
                 android:gravity="start|center_vertical" />
+
+            <Button
+                android:id="@+id/SettingsButton_Move"
+                android:text="@string/Settings_DatabaseMove"
+                android:textColor="#000000"
+                android:drawableLeft="@drawable/database_24px"
+                android:drawableTint="#444444"
+                android:backgroundTint="#CCCCCC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:drawablePadding="5dp"
+                android:textAllCaps="false"
+                android:gravity="start|center_vertical" />
+
             <Button
                 android:id="@+id/SettingsButton_DatabaseDelete"
                 android:text="@string/Settings_DatabaseDelete"

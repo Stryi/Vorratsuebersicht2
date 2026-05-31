@@ -83,7 +83,7 @@
     <string name="Settings_CurrentDatabaseOperation">Aktuelle Datenbank</string>
 
     <string name="Settings_DatabaseMove">Datenbank verschieben</string>
-    <string name="Settings_DatabaseMove_ConfirmMessage">Die aktuelle Datenbank befindet sich auf dem %1$s.\n\nSoll diese zum %2$s verschoben werden?</string>
+    <string name="Settings_DatabaseMove_ConfirmMessage">Die Datenbank \'%1$s\' befindet sich auf: %2$s.\n\nSoll diese nach: %3$s verschoben werden?</string>
     <string name="Settings_InternalStorage">Interner Speicher</string>
     <string name="Settings_SdCard">SD-Karte</string>
     <string name="Settings_CheckReport">Ergebnis der Prüfung:</string>
