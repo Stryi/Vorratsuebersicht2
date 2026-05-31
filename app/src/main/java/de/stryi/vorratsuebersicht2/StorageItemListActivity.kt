@@ -118,6 +118,10 @@ class StorageItemListActivity : AppCompatActivity() {
 
         this.initializeStorageFilter()
 
+        binding.StorageItemListFABAdd.setOnClickListener {
+            this.selectArticle()
+        }
+
         this.showStorageItemList()
     }
 

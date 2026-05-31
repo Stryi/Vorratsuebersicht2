@@ -99,6 +99,10 @@ class ArticleListActivity : AppCompatActivity() {
             this.loadCategoryList()
         }
 
+        binding.ArticleListFABAdd.setOnClickListener {
+            onCreateArticle()
+        }
+
         showArticleList()
     }
 
