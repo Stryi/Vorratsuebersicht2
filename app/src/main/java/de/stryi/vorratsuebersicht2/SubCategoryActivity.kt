@@ -1,9 +1,13 @@
 package de.stryi.vorratsuebersicht2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import de.stryi.vorratsuebersicht2.database.Database
 import de.stryi.vorratsuebersicht2.databinding.SubCategoryActivityBinding
 
@@ -45,4 +49,25 @@ class SubCategoryActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
+        menuInflater.inflate(R.menu.menu_sub_category, menu)
+        return true
+    }
+
+    /*
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    */
 }

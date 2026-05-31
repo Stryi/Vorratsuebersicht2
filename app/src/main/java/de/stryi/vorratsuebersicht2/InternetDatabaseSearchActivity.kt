@@ -1,5 +1,6 @@
 package de.stryi.vorratsuebersicht2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import de.stryi.vorratsuebersicht2.databinding.InternetDatabaseSearchBinding
@@ -64,7 +66,11 @@ class InternetDatabaseSearchActivity :AppCompatActivity()
         this.searchAndShowArticle(eanCode)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         menuInflater.inflate(R.menu.internet_database_search_menu, menu)
         return true
     }

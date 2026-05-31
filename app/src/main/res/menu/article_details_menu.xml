@@ -57,14 +57,8 @@
         android:title="@string/ArticleDetails_Menu_CurrentStock"
         app:iconTint="@color/Application_ActionBar_TextColor" />
 
-    <!-- Braucht man das noch überhaupt
-    <item android:id="@+id/ArticleDetailsMenu_Speech"
-        android:icon="@drawable/speech_to_text_24px"
-        app:iconTint="@color/Application_ActionBar_TextColor"
-        android:title="@string/ArticleDetails_Menu_VoiceInput" />
-    -->
-
     <item android:id="@+id/ArticleDetailsMenu_InternetDB"
+        android:icon="@drawable/search_24px"
         android:title="@string/ArticleDetails_Menu_SearchOpenFoodFacts"
         app:iconTint="@color/Application_ActionBar_TextColor" />
 

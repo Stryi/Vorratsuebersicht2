@@ -1,5 +1,6 @@
 package de.stryi.vorratsuebersicht2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -12,6 +13,7 @@ import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -113,10 +115,11 @@ class ArticleListActivity : AppCompatActivity() {
         binding.ArticleListCategories.adapter = dataAdapter
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Zeigt die Icons im Menü an, bringt aber Fehler beim Übersetzen
-        // https://medium.com/@ssuubbiirr/optionsmenuitem-with-icon-and-title-in-android-20cdbad87a3f
-        //if (menu is MenuBuilder) (menu as MenuBuilder).setOptionalIconsVisible(true)
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         menuInflater.inflate(R.menu.article_list_menu, menu)
 
         val searchItem = menu.findItem(R.id.ArticleList_Menu_Search)

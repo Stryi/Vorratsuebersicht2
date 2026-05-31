@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter
 import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -75,8 +76,12 @@ class ShoppingItemListActivity : AppCompatActivity()
         this.loadSupermarketList()
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean
     {
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         menuInflater.inflate(R.menu.shopping_item_list_menu, menu)
 
         val sortMenuItem = menu.findItem(R.id.ShoppingList_Sort)
@@ -410,4 +415,3 @@ class ShoppingItemListActivity : AppCompatActivity()
             }
         }
 }
-

@@ -1,5 +1,6 @@
 package de.stryi.vorratsuebersicht2
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -8,8 +9,9 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.PopupMenu
+import androidx.appcompat.widget.PopupMenu
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.recyclerview.widget.RecyclerView
 import de.stryi.vorratsuebersicht2.database.Records.Article
 import de.stryi.vorratsuebersicht2.database.Database
@@ -133,9 +135,15 @@ class ArticleListViewAdapter(private val articles: List<Article>,
         adapterScope.cancel()
     }
 
+    @SuppressLint("RestrictedApi")
     fun showContextMenu(holder: ArticleViewHolder) {
         val popupMenu = PopupMenu(holder.itemView.context, holder.option)
         popupMenu.menuInflater.inflate(R.menu.article_list_contextmenu, popupMenu.menu)
+        
+        if (popupMenu.menu is MenuBuilder) {
+            (popupMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
+        }
+
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
             val articleId = holder.itemView.tag as Int
             when (menuItem.itemId) {

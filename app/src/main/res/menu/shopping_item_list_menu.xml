@@ -30,6 +30,7 @@
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/ShoppingList_Sparse"
+        android:icon="@drawable/compress_24px"
         android:title="@string/ShoppingList_Sparse"
         app:iconTint="@color/Application_ActionBar_TextColor"
         android:checkable="true"

@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.FileProvider
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.switchmaterial.SwitchMaterial
@@ -190,15 +191,12 @@ class ArticleDetailsActivity : AppCompatActivity() {
         }
     }
 
-    //@SuppressLint("RestrictedApi")
+    @SuppressLint("RestrictedApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        /*
-        Damit wird das Icon angezeigtm aber im Hel/Dunkel funktioniert nicht.
-        if (menu is androidx.appcompat.view.menu.MenuBuilder)
+        if (menu is MenuBuilder)
         {
             menu.setOptionalIconsVisible(true)
         }
-        */
         menuInflater.inflate(R.menu.article_details_menu, menu)
         return true
     }

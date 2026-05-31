@@ -2,6 +2,7 @@ package de.stryi.vorratsuebersicht2
 
 import TwoLineAdapter
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import de.stryi.vorratsuebersicht2.database.AndroidDatabase
 import de.stryi.vorratsuebersicht2.database.Database
 import de.stryi.vorratsuebersicht2.databinding.MainActivityBinding
@@ -268,7 +270,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-     override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    @SuppressLint("RestrictedApi")
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        if (menu is MenuBuilder) {
+            menu.setOptionalIconsVisible(true)
+        }
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
