@@ -58,10 +58,11 @@ object AndroidDatabase {
         context: Context,
         assetsFileName: String,
         databaseFileName: String,
-        overrideIfExists: Boolean = false) : Exception?
+        overrideIfExists: Boolean = false,
+        targetDir: File? = null) : Exception?
     {
         // "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/files"
-        val dbPath = context.getExternalFilesDir(null)
+        val dbPath = targetDir ?: context.getExternalFilesDir(null)
 
         val dbFile = File(dbPath, databaseFileName)
 
@@ -114,7 +115,9 @@ object AndroidDatabase {
 
         for(extFilesDir in externalFilesDirs)
         {
-            for (file in extFilesDir?.listFiles()!!)
+            if (extFilesDir == null) continue
+
+            for (file in extFilesDir.listFiles()!!)
             {
                 if (!file.name.endsWith("db3"))
                     continue
@@ -125,20 +128,6 @@ object AndroidDatabase {
                 fileList.add(file)
             }
         }
-
-        /*
-        //"/storage/0000-0000/Vue-Database/Stryi2.db3"
-        //val databseDir = context.getDatabasePath(null)
-        val fileList = context.databaseList()
-
-        for(file in fileList)
-        {
-            if (file.endsWith(".db3"))
-            {
-                databaseList.add(file.substring(0, file.length - 4))
-            }
-        }
-        */
 
         fileList.sortBy { it.name }
 
@@ -218,5 +207,24 @@ object AndroidDatabase {
 
         return null
     }
-}
 
+    fun isOnSDCard(context: Context, file: File): Boolean {
+        val externalFilesDirs = context.getExternalFilesDirs(null)
+
+        // Die erste Position ist meist der interne Speicher,
+        // alles danach sind mögliche SD-Karten.
+        val sdCardDirs = externalFilesDirs.drop(1).filterNotNull()
+
+        return sdCardDirs.any { sdDir ->
+            try {
+                file.canonicalPath.startsWith(sdDir.canonicalPath)
+            } catch (_: Exception) {
+                false
+            }
+        }
+    }
+
+    fun getStorageRoots(context: Context): List<File> {
+        return context.getExternalFilesDirs(null).filterNotNull()
+    }
+}

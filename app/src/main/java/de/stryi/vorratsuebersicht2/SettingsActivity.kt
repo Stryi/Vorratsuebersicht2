@@ -21,6 +21,7 @@ import de.stryi.vorratsuebersicht2.databinding.SettingsActivityBinding
 import de.stryi.vorratsuebersicht2.tools.Logging
 import de.stryi.vorratsuebersicht2.tools.Settings
 import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht2.tools.TwoLineAdapter
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -323,84 +324,14 @@ class SettingsActivity : AppCompatActivity() {
         val file = File(databasePath)
         val uri = FileProvider.getUriForFile(this, "de.stryi.vorratsuebersicht2.provider", file)
 
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "application/octet-stream"
-        intent.putExtra(Intent.EXTRA_STREAM, uri)
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-
-        startActivity(Intent.createChooser(intent, "Datenbank teilen"))
-    }
-
-
-
-    /*
-    val sdCardRequestCode = 102
-    fun createBackup() {
-        PermissionHelper().requestPermission(
-            this,
-            Manifest.permission.CAMERA,
-            sdCardRequestCode)
-        {
-            createBackupInternal()
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_STREAM, uri)
+            type = "application/octet-stream"
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
+        startActivity(Intent.createChooser(shareIntent, "Datenbank teilen"))
     }
-
-    fun createBackupInternal()
-    {
-        // Vor dem Backup ggf. die User-Kategorien ggf. speichern,
-        // damit es auch im Backup ist.
-        this.saveUserDefinedCategories()
-
-        var lastBackupDay = Database.getSettingsDate("LAST_BACKUP")
-        if (lastBackupDay == null)
-        {
-            lastBackupDay = Database.getSettingsDate("LAST_BACKUP_TIME")
-        }
-
-        val changesCounter = Database.getChangeCounter()
-
-        // Datum vom Backup in der Datenbank speichern.
-        // Datum und Uhrzeit getrennt, damit auch die vorherige Version das auslesen kann
-        // (Kann nur Datum auslesen)
-        val now = LocalDateTime.now()
-        Database.setSettingsDate    ("LAST_BACKUP",      now)  // Für Abwärtskompatibilität
-        Database.setSettingsDateTime("LAST_BACKUP_TIME", now)
-
-        Database.resetChangeCounter()
-
-        val databaseFilePath = "/data/data/de.stryi.vorratsuebersicht2/databases/Stryi.db3"
-        val backupFilePath   = "/storage/1103-1406/Download/Stryi_2025.10.10.VueBak"
-
-        this.createBackupAndRestoreProgressBar()
-        Thread {
-            try {
-                File(backupFilePath).copyTo(File(databaseFilePath), true)
-                runOnUiThread {
-                    this.hideBackupAndRestoreProgressBar()
-                }
-            }
-            catch (e: Exception) {
-                runOnUiThread {
-                    Tools.showMessage(this, e.message!!)
-                    this.hideBackupAndRestoreProgressBar()
-                }
-            }
-
-        }.start()
-    }
-    */
-
-    /*
-    private fun onSelectDatabaseFolder() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-        intent.addFlags(
-            Intent.FLAG_GRANT_READ_URI_PERMISSION or
-            Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION or
-            Intent.FLAG_GRANT_PREFIX_URI_PERMISSION
-        )
-        startActivity(intent)
-    }
-    */
 
     private fun onRestoreBackupClick()
     {
@@ -595,10 +526,6 @@ class SettingsActivity : AppCompatActivity() {
 
     fun buttonNewDbClick()
     {
-        // Auswahl Verzeichnis, in dem ich die Datenbank ablegen könnte
-        //val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-        //startActivity(intent)
-
         lifecycleScope.launch {
             val newDatabaseName = Tools.askForText(this@SettingsActivity,
                 resources.getString(R.string.Settings_DatabaseNewDialogTitle),
@@ -615,16 +542,40 @@ class SettingsActivity : AppCompatActivity() {
                 return@launch
             }
 
-            val exception = AndroidDatabase.createLocalizedDatabaseFromAsset(this@SettingsActivity,
-                AndroidDatabase.SQLITE_FILENAME_NEW,
-                "$newDatabaseName.db3",
-                false)
+            val storageRoots = AndroidDatabase.getStorageRoots(this@SettingsActivity)
+            if (storageRoots.size > 1) {
+                val items = storageRoots.map { file ->
+                    val isSD = AndroidDatabase.isOnSDCard(this@SettingsActivity, file)
+                    val title = if (isSD) "SD-Karte" else "Interner Speicher"
+                    val subtitle = file.absolutePath
+                    title to subtitle
+                }
 
-            Tools.showException(this@SettingsActivity,
-                exception,
-                "Die Datenbank '$newDatabaseName' wurde erstellt.",
-                "Die Datenbank '$newDatabaseName' konnte nicht erstellt werden.")
+                val adapter = TwoLineAdapter(this@SettingsActivity, items)
+
+                val builder = AlertDialog.Builder(this@SettingsActivity, R.style.MyAlertDialogTheme)
+                builder.setTitle("Speicherort auswählen")
+                builder.setAdapter(adapter) { _, which ->
+                    performCreateDatabase(newDatabaseName, storageRoots[which])
+                }
+                builder.show()
+            } else {
+                performCreateDatabase(newDatabaseName, storageRoots.firstOrNull())
+            }
         }
+    }
+
+    private fun performCreateDatabase(newDatabaseName: String, targetDir: File?) {
+        val exception = AndroidDatabase.createLocalizedDatabaseFromAsset(this@SettingsActivity,
+            AndroidDatabase.SQLITE_FILENAME_NEW,
+            "$newDatabaseName.db3",
+            false,
+            targetDir)
+
+        Tools.showException(this@SettingsActivity,
+            exception,
+            "Die Datenbank '$newDatabaseName' wurde erstellt.",
+            "Die Datenbank '$newDatabaseName' konnte nicht erstellt werden.")
     }
 
     fun buttonRenameDBClick()
@@ -1036,4 +987,3 @@ class SettingsActivity : AppCompatActivity() {
         binding.ProgressBarCompress.visibility = View.INVISIBLE
     }
 }
-

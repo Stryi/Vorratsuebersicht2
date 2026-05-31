@@ -1,6 +1,5 @@
 package de.stryi.vorratsuebersicht2
 
-import TwoLineAdapter
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
@@ -27,6 +26,7 @@ import de.stryi.vorratsuebersicht2.tools.PermissionHelper
 import de.stryi.vorratsuebersicht2.tools.Settings
 import de.stryi.vorratsuebersicht2.tools.Tools
 import de.stryi.vorratsuebersicht2.tools.Tools.TRACE
+import de.stryi.vorratsuebersicht2.tools.TwoLineAdapter
 import java.io.File
 import java.time.LocalDateTime
 import java.util.Locale
