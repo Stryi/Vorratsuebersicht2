@@ -17,6 +17,7 @@ zxingAndroidEmbedded = "4.3.0"
 activity = "1.8.0"
 swiperefreshlayout = "1.1.0"
 uiText = "1.10.4"
+kotlinxCoroutines = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,8 +36,8 @@ zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", ve
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-

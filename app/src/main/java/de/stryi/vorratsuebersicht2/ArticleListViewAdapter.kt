@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import de.stryi.vorratsuebersicht2.database.Records.Article
 import de.stryi.vorratsuebersicht2.database.Database
 import de.stryi.vorratsuebersicht2.tools.AddToShoppingListDialog
+import kotlinx.coroutines.*
 
 class ArticleListViewAdapter(private val articles: List<Article>,
                              private val onItemClick: (articleId: Int) -> Unit) :
     RecyclerView.Adapter<ArticleListViewAdapter.ArticleViewHolder>()
 {
+    private val adapterScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
     class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view)
     {
         val heading: TextView = view.findViewById(R.id.ArticleListView_Heading)
@@ -34,6 +37,7 @@ class ArticleListViewAdapter(private val articles: List<Article>,
 
         var minQuantity: Int?  = null
         var prefQuantity: Int? = null
+        var imageJob: Job? = null
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
@@ -84,25 +88,49 @@ class ArticleListViewAdapter(private val articles: List<Article>,
             showContextMenu(holder)
         }
 
-        val articleImage = Database.getArticleImage(article.articleId, false)
+        // Bild asynchron laden
+        holder.imageJob?.cancel()
+        holder.image.setImageResource(R.drawable.photo_camera_24px)
+        holder.image.alpha = 0.2f
+        holder.image.setOnClickListener { }
 
-        if (articleImage == null)
-        {
-            holder.image.setImageResource(R.drawable.photo_camera_24px)
-            holder.image.alpha = 0.2.toFloat()
-            holder.image.setOnClickListener { }
-        }
-        else
-        {
-            val bitmap = BitmapFactory.decodeByteArray(articleImage.imageSmall, 0, articleImage.imageSmall!!.size)
-            holder.image.setImageBitmap(bitmap)
-            holder.image.alpha = 1.toFloat()
-            holder.image.setOnClickListener {
-                val intent = Intent(holder.image.context, ArticleImageActivity::class.java)
-                intent.putExtra("ArticleId", article.articleId)
-                holder.image.context.startActivity(intent)
+        holder.imageJob = adapterScope.launch {
+            val bitmap = withContext(Dispatchers.IO) {
+                val articleImage = Database.getArticleImage(article.articleId, false)
+                articleImage?.imageSmall?.let { bytes ->
+                    try {
+                        BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+            }
+
+            if (isActive) {
+                if (bitmap != null) {
+                    holder.image.setImageBitmap(bitmap)
+                    holder.image.alpha = 1.0f
+                    holder.image.setOnClickListener {
+                        val intent = Intent(holder.image.context, ArticleImageActivity::class.java)
+                        intent.putExtra("ArticleId", article.articleId)
+                        holder.image.context.startActivity(intent)
+                    }
+                } else {
+                    holder.image.setImageResource(R.drawable.photo_camera_24px)
+                    holder.image.alpha = 0.2f
+                }
             }
         }
+    }
+
+    override fun onViewDetachedFromWindow(holder: ArticleViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.imageJob?.cancel()
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        adapterScope.cancel()
     }
 
     fun showContextMenu(holder: ArticleViewHolder) {
@@ -115,8 +143,6 @@ class ArticleListViewAdapter(private val articles: List<Article>,
                     val storageDetails = Intent(holder.itemView.context, StorageItemInventoryActivity::class.java)
                     storageDetails.putExtra("ArticleId", articleId)
                     holder.itemView.context.startActivity(storageDetails)
-                    //this.SaveListState()
-                    //this.StartActivityForResult(storageDetails, 20)
                     true
                 }
                 R.id.ArticleList_ContextMenu_AufEinkaufszettel -> {
