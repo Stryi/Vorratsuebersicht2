@@ -25,41 +25,41 @@
     <item android:id="@+id/ArticleDetailsMenu_MakeAPhoto"
         android:icon="@drawable/photo_camera_24px"
         android:title="@string/ArticleDetails_Menu_CreatePicture"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_SelectAPicture"
         android:icon="@drawable/photo_24px"
         android:title="@string/ArticleDetails_Menu_SelectPicture"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_ShowPicture"
         android:icon="@drawable/photo_camera_24px"
         android:title="@string/ArticleDetails_Menu_ShowPicture"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_RemovePicture"
         android:icon="@drawable/hide_image_24px"
         android:title="@string/ArticleDetails_Menu_RemovePicture"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_ScanEAN"
         android:icon="@drawable/barcode_40px"
         android:title="@string/ArticleDetails_Menu_EAN_Scannen"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_Delete"
         android:icon="@drawable/delete_24px"
-        app:iconTint="@color/Application_ActionBar_TextColor"
+        app:iconTint="?android:attr/textColorPrimary"
         android:title="@string/ArticleDetails_Menu_DeleteArticle" />
 
     <item android:id="@+id/ArticleDetailsMenu_ToStorageQuantity"
         android:icon="@drawable/assignment_24px"
         android:title="@string/ArticleDetails_Menu_CurrentStock"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
     <item android:id="@+id/ArticleDetailsMenu_InternetDB"
         android:icon="@drawable/search_24px"
         android:title="@string/ArticleDetails_Menu_SearchOpenFoodFacts"
-        app:iconTint="@color/Application_ActionBar_TextColor" />
+        app:iconTint="?android:attr/textColorPrimary" />
 
 </menu>

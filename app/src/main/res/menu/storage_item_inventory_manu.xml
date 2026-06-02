@@ -19,7 +19,7 @@
     <item android:id="@+id/StorageItemQuantity_Menu_EditPicture"
         android:icon="@drawable/photo_24px"
         android:title="@string/StorageItemQuantity_Menu_EditPicture"
-        app:iconTint="@color/Application_ActionBar_TextColor"
+        app:iconTint="?android:attr/textColorPrimary"
         app:showAsAction="never" />
 
     <item android:id="@+id/StorageItemQuantity_Menu_Cancel"
@@ -39,7 +39,7 @@
     <item android:id="@+id/StorageItemQuantity_Menu_ArticleDetails"
         android:icon="@drawable/assignment_24px"
         android:title="@string/StorageItemQuantity_Menu_Artikelangaben"
-        app:iconTint="@color/Application_ActionBar_TextColor"
+        app:iconTint="?android:attr/textColorPrimary"
         app:showAsAction="never" />
 
 </menu>

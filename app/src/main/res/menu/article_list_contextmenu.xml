@@ -5,12 +5,12 @@
     <item
         android:id="@+id/ArticleList_ContextMenu_Lagerbestand"
         android:icon="@drawable/assignment_24px"
-        app:iconTint="@color/Text_Color"
+        app:iconTint="?android:attr/textColorPrimary"
         android:title="@string/ArticleList_Lagerbestand" />
 
     <item android:id="@+id/ArticleList_ContextMenu_AufEinkaufszettel"
         android:icon="@drawable/shopping_cart_24px"
-        app:iconTint="@color/Text_Color"
+        app:iconTint="?android:attr/textColorPrimary"
         android:title="@string/ArticleList_ToShoppingList" />
 
 </menu>

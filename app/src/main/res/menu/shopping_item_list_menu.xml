@@ -26,13 +26,13 @@
     <item android:id="@+id/ShoppingList_Share"
         android:icon="@drawable/share_24px"
         android:title="@string/App_Share"
-        app:iconTint="@color/Application_ActionBar_TextColor"
+        app:iconTint="?android:attr/textColorPrimary"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/ShoppingList_Sparse"
         android:icon="@drawable/compress_24px"
         android:title="@string/ShoppingList_Sparse"
-        app:iconTint="@color/Application_ActionBar_TextColor"
+        app:iconTint="?android:attr/textColorPrimary"
         android:checkable="true"
         app:showAsAction="never" />
 </menu>
