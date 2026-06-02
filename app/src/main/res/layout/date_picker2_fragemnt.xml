@@ -8,13 +8,14 @@
     <TextView
         android:text="Jahr"
         android:textSize="18sp"
+        android:textColor="@color/Default_Text_Color"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <!-- Zeile "Jahr" -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -41,13 +42,14 @@
     <TextView
         android:text="Monat"
         android:textSize="18sp"
+        android:textColor="@color/Default_Text_Color"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <!-- Zeile "Monat" -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -85,7 +87,7 @@
     <!-- Zeile "Monat" -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -123,8 +125,9 @@
     <TextView
         android:text="Tag"
         android:textSize="18sp"
+        android:textColor="@color/Default_Text_Color"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
     <GridLayout
         android:layout_width="match_parent"
@@ -182,19 +185,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layoutDirection="rtl" >
 
         <Button
             android:id="@+id/buttonOk"
             android:text="@string/App_Ok"
+            android:textColor="@color/Default_Text_Color"
             android:backgroundTint="@android:color/holo_green_light"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
 
         <Button
             android:id="@+id/buttonNoDate"
+            android:textColor="@color/Default_Text_Color"
             android:text="Kein Datum"
             android:backgroundTint="@android:color/holo_red_light"
             android:layout_height="wrap_content"

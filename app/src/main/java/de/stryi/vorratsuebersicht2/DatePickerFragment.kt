@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.core.graphics.toColorInt
 import java.time.LocalDate
@@ -280,15 +281,17 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
 
     private fun updateStatus(buttonId: Int, value: Int) {
         val button = this.view?.findViewById<android.widget.Button>(buttonId)
-        val text = button?.text.toString().toInt()
-
-        if (text == value)
-        {
-            markAsActive(buttonId)
-        }
-        else
-        {
-            markAsInactive(buttonId)
+        val textStr = button?.text?.toString()
+        if (textStr != null && textStr.isNotEmpty()) {
+            val text = textStr.toIntOrNull()
+            if (text == value)
+            {
+                markAsActive(buttonId)
+            }
+            else if (text != null)
+            {
+                markAsInactive(buttonId)
+            }
         }
     }
 
@@ -300,8 +303,11 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
 
     private fun markAsInactive(buttonId: Int) {
         val button = this.view?.findViewById<android.widget.Button>(buttonId)
-        button?.setTextColor(Color.BLACK)
-        button?.setBackgroundColor(Color.TRANSPARENT)
+        button?.let {
+            val color = ContextCompat.getColor(it.context, R.color.Default_Text_Color)
+            it.setTextColor(color)
+            it.setBackgroundColor(Color.TRANSPARENT)
+        }
     }
 
     fun daysInMonth(year: Int, month: Int): Int {
@@ -310,4 +316,3 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
     }
 
 }
-
