@@ -551,7 +551,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    fun isOnSDCard(context: Context, file: File): Boolean {
+    private fun isOnSDCard(context: Context, file: File): Boolean {
         val externalFilesDirs = context.getExternalFilesDirs(null)
 
         // Die erste Position ist meist der interne Speicher,
