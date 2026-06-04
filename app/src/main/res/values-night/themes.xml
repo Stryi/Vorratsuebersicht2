@@ -22,6 +22,9 @@
         <!-- Farbe für ein Switch -->
         <item name="switchStyle">@style/MySwitch</item>
 
+        <!-- Farbe für Platzhalter (Hint) - 50% durchsichtig -->
+        <item name="android:textColorHint">@color/hint_color</item>
+
     </style>
 
     <style name="MyRadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
