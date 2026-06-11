@@ -21,7 +21,6 @@
         <Button
             android:id="@+id/year_button_Back"
             android:text="&lt;"
-            android:layout_width="30dp"
             android:background="@drawable/background_rectangle"
             style="@style/CalenderYearButtonStyle" />
 
@@ -34,8 +33,7 @@
             android:id="@+id/year_button_Forward"
             android:text="&gt;"
             style="@style/CalenderYearButtonStyle"
-            android:background="@drawable/background_rectangle"
-            android:layout_width="30dp" />
+            android:background="@drawable/background_rectangle" />
 
     </LinearLayout>
 
@@ -195,7 +193,7 @@
             android:textColor="@color/Default_Text_Color"
             android:backgroundTint="@android:color/holo_green_light"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_width="125dp" />
 
         <Button
             android:id="@+id/buttonNoDate"
@@ -203,7 +201,7 @@
             android:text="Kein Datum"
             android:backgroundTint="@android:color/holo_red_light"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_width="175dp" />
 
     </LinearLayout>
 
