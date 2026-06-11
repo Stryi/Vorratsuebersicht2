@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
-import de.stryi.vorratsuebersicht2.databinding.InternetDatabaseSearchBinding
-import de.stryi.vorratsuebersicht2.tools.QuantityAndUnit
+import de.stryi.vorratsuebersicht.databinding.InternetDatabaseSearchBinding
+import de.stryi.vorratsuebersicht.tools.QuantityAndUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

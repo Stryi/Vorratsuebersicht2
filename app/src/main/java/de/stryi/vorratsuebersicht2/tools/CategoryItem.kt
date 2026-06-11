@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2.tools
+package de.stryi.vorratsuebersicht.tools
 
 data class CategoryItem(
     val text: String,

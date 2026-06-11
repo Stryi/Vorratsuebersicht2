@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "de.stryi.vorratsuebersicht2"
+    namespace = "de.stryi.vorratsuebersicht"
     compileSdk = 36
 
     defaultConfig {

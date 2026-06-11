@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -17,16 +17,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
-import de.stryi.vorratsuebersicht2.database.AndroidDatabase
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.databinding.MainActivityBinding
-import de.stryi.vorratsuebersicht2.tools.AddToShoppingListDialog
-import de.stryi.vorratsuebersicht2.tools.Logging
-import de.stryi.vorratsuebersicht2.tools.PermissionHelper
-import de.stryi.vorratsuebersicht2.tools.Settings
-import de.stryi.vorratsuebersicht2.tools.Tools
-import de.stryi.vorratsuebersicht2.tools.Tools.TRACE
-import de.stryi.vorratsuebersicht2.tools.TwoLineAdapter
+import de.stryi.vorratsuebersicht.databinding.MainActivityBinding
+import de.stryi.vorratsuebersicht.database.AndroidDatabase
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
+import de.stryi.vorratsuebersicht.tools.Logging
+import de.stryi.vorratsuebersicht.tools.PermissionHelper
+import de.stryi.vorratsuebersicht.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Tools
+import de.stryi.vorratsuebersicht.tools.Tools.TRACE
+import de.stryi.vorratsuebersicht.tools.TwoLineAdapter
 import java.io.File
 import java.time.LocalDateTime
 import java.util.Locale

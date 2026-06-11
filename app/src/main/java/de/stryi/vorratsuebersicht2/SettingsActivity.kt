@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.content.Context
 import android.content.Intent
@@ -14,14 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
-import de.stryi.vorratsuebersicht2.database.AndroidDatabase
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.databinding.SettingsActivityBinding
-import de.stryi.vorratsuebersicht2.tools.CsvExport
-import de.stryi.vorratsuebersicht2.tools.Logging
-import de.stryi.vorratsuebersicht2.tools.Settings
-import de.stryi.vorratsuebersicht2.tools.Tools
-import de.stryi.vorratsuebersicht2.tools.TwoLineAdapter
+import de.stryi.vorratsuebersicht.database.AndroidDatabase
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.databinding.SettingsActivityBinding
+import de.stryi.vorratsuebersicht.tools.CsvExport
+import de.stryi.vorratsuebersicht.tools.Logging
+import de.stryi.vorratsuebersicht.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Tools
+import de.stryi.vorratsuebersicht.tools.TwoLineAdapter
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream

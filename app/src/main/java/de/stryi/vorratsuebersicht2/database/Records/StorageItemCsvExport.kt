@@ -1,10 +1,10 @@
-package de.stryi.vorratsuebersicht2.database.Records
+package de.stryi.vorratsuebersicht.database.Records
 
 import android.database.Cursor
-import de.stryi.vorratsuebersicht2.database.getDouble
-import de.stryi.vorratsuebersicht2.database.getIntOrNull
-import de.stryi.vorratsuebersicht2.database.getLocalDateOrNull
-import de.stryi.vorratsuebersicht2.database.getStringOrNull
+import de.stryi.vorratsuebersicht.database.getDouble
+import de.stryi.vorratsuebersicht.database.getIntOrNull
+import de.stryi.vorratsuebersicht.database.getLocalDateOrNull
+import de.stryi.vorratsuebersicht.database.getStringOrNull
 import java.time.LocalDate
 
 class StorageItemCsvExport {

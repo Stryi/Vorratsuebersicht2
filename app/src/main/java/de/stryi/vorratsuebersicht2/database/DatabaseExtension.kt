@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2.database
+package de.stryi.vorratsuebersicht.database
 
 import android.database.Cursor
 import android.util.Log

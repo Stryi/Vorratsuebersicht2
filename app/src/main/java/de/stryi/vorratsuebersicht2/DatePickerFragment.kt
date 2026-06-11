@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.graphics.Color
 import android.os.Bundle

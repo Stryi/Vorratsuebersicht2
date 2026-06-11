@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2.tools
+package de.stryi.vorratsuebersicht.tools
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import de.stryi.vorratsuebersicht2.R
+import de.stryi.vorratsuebersicht.R
 
 class TwoLineAdapter(
     context: Context,

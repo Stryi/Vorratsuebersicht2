@@ -1,12 +1,12 @@
-package de.stryi.vorratsuebersicht2.database.Records
+package de.stryi.vorratsuebersicht.database.Records
 
 import android.database.Cursor
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.database.getDoubleOrNull
-import de.stryi.vorratsuebersicht2.database.getIntOrNull
-import de.stryi.vorratsuebersicht2.database.getStringOrNull
-import de.stryi.vorratsuebersicht2.tools.PricePerUnit
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.database.getDoubleOrNull
+import de.stryi.vorratsuebersicht.database.getIntOrNull
+import de.stryi.vorratsuebersicht.database.getStringOrNull
+import de.stryi.vorratsuebersicht.tools.PricePerUnit
+import de.stryi.vorratsuebersicht.tools.Tools
 import kotlin.collections.List
 
 class ArticleInfo {

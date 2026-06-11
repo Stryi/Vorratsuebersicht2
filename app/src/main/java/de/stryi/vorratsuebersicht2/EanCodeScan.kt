@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.os.Bundle
 import android.os.Debug
@@ -11,7 +11,7 @@ import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.BarcodeCallback
-import de.stryi.vorratsuebersicht2.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Settings
 
 class EanCodeScan : DialogFragment() {
 

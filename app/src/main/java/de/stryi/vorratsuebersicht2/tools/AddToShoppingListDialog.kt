@@ -1,11 +1,11 @@
-package de.stryi.vorratsuebersicht2.tools
+package de.stryi.vorratsuebersicht.tools
 
 import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import android.text.InputType
 import android.widget.EditText
-import de.stryi.vorratsuebersicht2.R
-import de.stryi.vorratsuebersicht2.database.Database
+import de.stryi.vorratsuebersicht.R
+import de.stryi.vorratsuebersicht.database.Database
 import java.util.Locale
 
 class AddToShoppingListDialog {

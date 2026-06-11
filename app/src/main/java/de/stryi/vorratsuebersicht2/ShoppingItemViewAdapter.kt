@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -9,8 +9,8 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.database.Records.ShoppingItem
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.database.Records.ShoppingItem
 
 class ShoppingItemViewAdapter(
     private val shoppingItems: List<ShoppingItem>,

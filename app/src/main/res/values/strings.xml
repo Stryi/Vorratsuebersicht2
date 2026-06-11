@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Applikations Name-->
-    <string name="App_Name">Neuer Vorratsübersicht</string>
+    <string name="App_Name">Vorratsübersicht (Beta)</string>
     <string name="App_Yes">Ja</string>
     <string name="App_No">Nein</string>
     <string name="App_Ok">OK</string>

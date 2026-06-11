@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import StockStatistic
 import android.annotation.SuppressLint
@@ -19,10 +19,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.databinding.StorageItemListBinding
-import de.stryi.vorratsuebersicht2.tools.Settings
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.databinding.StorageItemListBinding
+import de.stryi.vorratsuebersicht.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Tools
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

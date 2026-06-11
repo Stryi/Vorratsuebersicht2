@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.databinding.SubCategoryActivityBinding
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.databinding.SubCategoryActivityBinding
 
 class SubCategoryActivity : AppCompatActivity() {
 

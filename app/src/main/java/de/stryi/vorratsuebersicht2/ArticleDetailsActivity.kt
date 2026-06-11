@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import ImageResizer
 import android.Manifest
@@ -20,16 +20,16 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.FileProvider
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.switchmaterial.SwitchMaterial
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.database.Records.Article
-import de.stryi.vorratsuebersicht2.database.Records.ArticleImage
-import de.stryi.vorratsuebersicht2.databinding.ArticleDetailsBinding
-import de.stryi.vorratsuebersicht2.tools.AddToShoppingListDialog
-import de.stryi.vorratsuebersicht2.tools.PermissionHelper
-import de.stryi.vorratsuebersicht2.tools.Settings
-import de.stryi.vorratsuebersicht2.tools.Tools
-import de.stryi.vorratsuebersicht2.tools.Tools.TRACE
-import de.stryi.vorratsuebersicht2.tools.UnitConvert
+import de.stryi.vorratsuebersicht.databinding.ArticleDetailsBinding
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.database.Records.Article
+import de.stryi.vorratsuebersicht.database.Records.ArticleImage
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
+import de.stryi.vorratsuebersicht.tools.PermissionHelper
+import de.stryi.vorratsuebersicht.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Tools
+import de.stryi.vorratsuebersicht.tools.Tools.TRACE
+import de.stryi.vorratsuebersicht.tools.UnitConvert
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.Date

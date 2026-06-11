@@ -1,7 +1,7 @@
-package de.stryi.vorratsuebersicht2.tools
+package de.stryi.vorratsuebersicht.tools
 
 import android.content.Context
-import de.stryi.vorratsuebersicht2.MainActivity
+import de.stryi.vorratsuebersicht.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.core.content.edit

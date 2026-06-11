@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2.tools
+package de.stryi.vorratsuebersicht.tools
 
 import android.app.Activity
 import android.content.Context
@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import de.stryi.vorratsuebersicht2.R
+import de.stryi.vorratsuebersicht.R
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
 import java.text.DecimalFormat

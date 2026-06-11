@@ -1,7 +1,7 @@
-package de.stryi.vorratsuebersicht2.database
+package de.stryi.vorratsuebersicht.database
 
 import android.content.Context
-import de.stryi.vorratsuebersicht2.tools.trimEnd
+import de.stryi.vorratsuebersicht.tools.trimEnd
 import java.io.File
 import java.io.IOException
 import java.io.InputStream

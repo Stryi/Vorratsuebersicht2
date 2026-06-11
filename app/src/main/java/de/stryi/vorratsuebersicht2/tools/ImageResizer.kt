@@ -1,4 +1,4 @@
-//package de.stryi.vorratsuebersicht2.tools
+//package de.stryi.vorratsuebersicht.tools
 
 import android.graphics.Bitmap
 import java.io.ByteArrayOutputStream

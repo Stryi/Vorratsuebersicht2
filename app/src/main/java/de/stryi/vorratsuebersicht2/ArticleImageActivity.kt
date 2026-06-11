@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -12,10 +12,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.lifecycle.lifecycleScope
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.databinding.ArticleImageBinding
-import de.stryi.vorratsuebersicht2.tools.Tools
-import de.stryi.vorratsuebersicht2.tools.toPngByteArray
+import de.stryi.vorratsuebersicht.R
+import de.stryi.vorratsuebersicht.databinding.ArticleImageBinding
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.tools.Tools
+import de.stryi.vorratsuebersicht.tools.toPngByteArray
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

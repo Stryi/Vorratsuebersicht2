@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.stryi.vorratsuebersicht2.database.Records.StorageItem
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.database.Records.StorageItem
+import de.stryi.vorratsuebersicht.tools.Tools
 
 class StorageItemInventoryViewAdapter(private val storageItems: MutableList<StorageItem>,
                                       private val onItemClicked: (action: ActionType, StorageItem) -> Unit) :

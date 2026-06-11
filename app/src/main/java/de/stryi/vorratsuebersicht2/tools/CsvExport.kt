@@ -1,9 +1,9 @@
-﻿package de.stryi.vorratsuebersicht2.tools
+﻿package de.stryi.vorratsuebersicht.tools
 
 import android.app.Activity
 import android.content.Intent
 import androidx.core.content.FileProvider
-import de.stryi.vorratsuebersicht2.database.Database
+import de.stryi.vorratsuebersicht.database.Database
 import java.io.File
 import java.time.LocalDate
 

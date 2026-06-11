@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AlertDialog
@@ -17,11 +17,11 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.database.Records.ShoppingItem
-import de.stryi.vorratsuebersicht2.databinding.ShoppingItemListBinding
-import de.stryi.vorratsuebersicht2.tools.Settings
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.database.Records.ShoppingItem
+import de.stryi.vorratsuebersicht.databinding.ShoppingItemListBinding
+import de.stryi.vorratsuebersicht.tools.Settings
+import de.stryi.vorratsuebersicht.tools.Tools
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 

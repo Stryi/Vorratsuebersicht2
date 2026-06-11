@@ -1,9 +1,9 @@
-package de.stryi.vorratsuebersicht2.database.Records
+package de.stryi.vorratsuebersicht.database.Records
 
 import android.database.Cursor
-import de.stryi.vorratsuebersicht2.database.getBlobOrNull
-import de.stryi.vorratsuebersicht2.database.getDateOrNull
-import de.stryi.vorratsuebersicht2.database.getIntOrNull
+import de.stryi.vorratsuebersicht.database.getBlobOrNull
+import de.stryi.vorratsuebersicht.database.getDateOrNull
+import de.stryi.vorratsuebersicht.database.getIntOrNull
 import java.util.Date
 
 class ArticleImage {

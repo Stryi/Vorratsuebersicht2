@@ -3,7 +3,7 @@
     <style name="CalenderYearButtonStyle">
         <item name="android:textColor">@color/Default_Text_Color</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_width">65dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_margin">1dp</item>
         <item name="android:padding">0dp</item>
@@ -12,7 +12,7 @@
     <style name="CalenderMonthButtonStyle">
         <item name="android:textColor">@color/Default_Text_Color</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_width">55dp</item>
+        <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_margin">1dp</item>
         <item name="android:padding">0dp</item>
@@ -21,7 +21,7 @@
     <style name="CalenderDayButtonStyle">
         <item name="android:textColor">@color/Default_Text_Color</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:layout_width">66dp</item>
+        <item name="android:layout_width">65dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_margin">1dp</item>
         <item name="android:padding">0dp</item>

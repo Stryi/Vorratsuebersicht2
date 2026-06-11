@@ -1,8 +1,8 @@
 ﻿import android.annotation.SuppressLint
 import android.app.Activity
-import de.stryi.vorratsuebersicht2.R
-import de.stryi.vorratsuebersicht2.database.Records.ArticleInfo
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.R
+import de.stryi.vorratsuebersicht.database.Records.ArticleInfo
+import de.stryi.vorratsuebersicht.tools.Tools
 import java.text.NumberFormat
 
 class StockStatistic {

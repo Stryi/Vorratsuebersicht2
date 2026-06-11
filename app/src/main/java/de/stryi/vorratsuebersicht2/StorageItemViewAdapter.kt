@@ -1,4 +1,4 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,10 +13,10 @@ import androidx.appcompat.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.recyclerview.widget.RecyclerView
-import de.stryi.vorratsuebersicht2.database.Database
-import de.stryi.vorratsuebersicht2.database.Records.ArticleInfo
-import de.stryi.vorratsuebersicht2.tools.AddToShoppingListDialog
-import de.stryi.vorratsuebersicht2.tools.Tools
+import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.database.Records.ArticleInfo
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
+import de.stryi.vorratsuebersicht.tools.Tools
 
 
 class StorageItemViewAdapter(

@@ -1,8 +1,8 @@
-package de.stryi.vorratsuebersicht2
+package de.stryi.vorratsuebersicht
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import de.stryi.vorratsuebersicht2.databinding.LicenseActivityBinding
+import de.stryi.vorratsuebersicht.databinding.LicenseActivityBinding
 
 class LicenseActivity : AppCompatActivity() {
 
