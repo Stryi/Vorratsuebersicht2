@@ -13,7 +13,8 @@
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/MainAppBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/main_app_bar_height"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
         android:background="@color/Application_ActionBar_Background"
         app:titleTextColor="@color/Application_ActionBar_TextColor"
         app:subtitleTextColor="@color/Application_ActionBar_TextColor2"
@@ -23,8 +24,11 @@
         app:title="Vorratsübersicht"
         tools:ignore="MissingConstraints" />
 
-        <include
-            android:id="@+id/contentLayout"
-            layout="@layout/main_activity_content" />
+    <include
+        android:id="@+id/contentLayout"
+        layout="@layout/main_activity_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

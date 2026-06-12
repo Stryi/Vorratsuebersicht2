@@ -35,7 +35,7 @@ object AndroidDatabase {
     /// </summary>
     private fun createLocalizedDatabaseFromAsset(context: Context, fileName: String) : Boolean
     {
-        // "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/files"
+        // "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht/files"
         val dbPath = context.getExternalFilesDir(null)
 
         val dbFile = File(dbPath, fileName)
@@ -61,7 +61,7 @@ object AndroidDatabase {
         overrideIfExists: Boolean = false,
         targetDir: File? = null) : Exception?
     {
-        // "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/files"
+        // "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht/files"
         val dbPath = targetDir ?: context.getExternalFilesDir(null)
 
         val dbFile = File(dbPath, databaseFileName)
@@ -109,8 +109,8 @@ object AndroidDatabase {
     {
         val fileList = mutableListOf<File>()
 
-        // "/storage/emulated/0/Android/data/de.stryi.Vorratsuebersicht2/files"
-        // "/storage/0E0E-2316/Android/data/de.stryi.Vorratsuebersicht2/files"
+        // "/storage/emulated/0/Android/data/de.stryi.Vorratsuebersicht/files"
+        // "/storage/0E0E-2316/Android/data/de.stryi.Vorratsuebersicht/files"
         val externalFilesDirs = context.getExternalFilesDirs(null)
 
         for(extFilesDir in externalFilesDirs)

@@ -785,7 +785,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val databaseName = Tools.getBackupDatabaseName(fileName)
 
-        // "/storage/emulated/0/Android/data/de.stryi.Vorratsuebersicht2/files"
+        // "/storage/emulated/0/Android/data/de.stryi.Vorratsuebersicht/files"
         val dbPath = this.getExternalFilesDir(null)
 
         lifecycleScope.launch {
