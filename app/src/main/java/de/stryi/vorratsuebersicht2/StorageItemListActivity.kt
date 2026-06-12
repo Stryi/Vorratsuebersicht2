@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -108,12 +107,6 @@ class StorageItemListActivity : AppCompatActivity() {
         if (!this.eanCode.isNullOrEmpty())
         {
             binding.StorageItemListAppBar.subtitle = "EAN Code: " + this.eanCode
-        }
-
-        if (!binding.StorageItemListAppBar.subtitle.isNullOrEmpty())
-        {
-            val heightInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60f, resources.displayMetrics).toInt()
-            binding.StorageItemListAppBar.layoutParams.height = heightInPx
         }
 
         this.initializeStorageFilter()
