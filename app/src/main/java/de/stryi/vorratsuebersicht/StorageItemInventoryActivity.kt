@@ -434,6 +434,15 @@ class StorageItemInventoryActivity : AppCompatActivity() {
             input.setText(Tools.formatNumber(storageItem.quantity))
         }
         input.setSelection(input.text.length)
+
+        // Setze den Abstand (Padding) für den EditText
+        val marginInDp = 20
+        val scale = this.resources.displayMetrics.density
+        val marginInPixels = (marginInDp * scale + 0.5f).toInt()
+        input.setPadding(marginInPixels, marginInPixels, marginInPixels, marginInPixels)
+
+        input.requestFocus()
+        input.setSelection(0, input.text.length)
         dialog.setView(input)
         dialog.setNegativeButton(R.string.App_Cancel) { _, _ -> }
         dialog.setPositiveButton(R.string.App_Ok) { _, _ ->
@@ -447,10 +456,6 @@ class StorageItemInventoryActivity : AppCompatActivity() {
                 storageItem.quantity = neueAnzahl
 
                 this.saveStorageItem(storageItem)
-
-                //if (this.quantity >= 1) {
-                //    this.quantity = this.quantity - neueAnzahl
-                //}
             }
 
         }
