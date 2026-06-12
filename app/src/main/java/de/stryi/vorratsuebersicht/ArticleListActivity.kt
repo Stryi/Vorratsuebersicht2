@@ -17,7 +17,6 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.stryi.vorratsuebersicht.R
 import de.stryi.vorratsuebersicht.database.Database
 import de.stryi.vorratsuebersicht.databinding.ArticleListBinding
 import de.stryi.vorratsuebersicht.tools.CategoryItem

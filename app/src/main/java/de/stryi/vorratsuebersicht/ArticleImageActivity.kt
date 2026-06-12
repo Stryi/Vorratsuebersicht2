@@ -12,7 +12,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.lifecycle.lifecycleScope
-import de.stryi.vorratsuebersicht.R
 import de.stryi.vorratsuebersicht.databinding.ArticleImageBinding
 import de.stryi.vorratsuebersicht.database.Database
 import de.stryi.vorratsuebersicht.tools.Tools
