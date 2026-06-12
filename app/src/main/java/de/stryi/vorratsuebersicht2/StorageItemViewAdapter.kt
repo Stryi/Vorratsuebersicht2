@@ -188,20 +188,20 @@ class StorageItemViewAdapter(
                 else
                 {
                     if (info.isNotEmpty()) info += "\r\n"
-                    info += String.format(withThisDate, quantityText, Tools.toString(result.bestBefore))
+                    info += String.format(withThisDate, quantityText, Tools.toHumanString(result.bestBefore))
                 }
             }
 
             if (result.warningLevel == 1)
             {
                 if (warning.isNotEmpty()) warning += "\r\n"
-                warning += String.format(withThisDate, quantityText, Tools.toString(result.bestBefore))
+                warning += String.format(withThisDate, quantityText, Tools.toHumanString(result.bestBefore))
             }
 
             if (result.warningLevel == 2)
             {
                 if (error.isNotEmpty()) error += "\r\n"
-                error += String.format(withThisDate, quantityText, Tools.toString(result.bestBefore))
+                error += String.format(withThisDate, quantityText, Tools.toHumanString(result.bestBefore))
             }
         }
 

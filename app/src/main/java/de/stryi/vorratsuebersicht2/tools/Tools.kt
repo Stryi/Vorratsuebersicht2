@@ -97,6 +97,14 @@ object Tools {
         if (date == null)
             return ""
 
+        val formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+        return date.format(formatter)
+    }
+
+    fun toHumanString(date: LocalDate?) : String? {
+        if (date == null)
+            return ""
+
         val formatter  = DateTimeFormatter.ofPattern("yyyy.MM.dd", Locale.getDefault())
         return date.format(formatter)
     }

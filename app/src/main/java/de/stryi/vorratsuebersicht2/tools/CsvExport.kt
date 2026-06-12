@@ -161,7 +161,7 @@ class CsvExport private constructor(
             return
         }
 
-        sb.append(Tools.toString(value))
+        sb.append(Tools.toHumanString(value))
     }
 
     private fun addField(sb: StringBuilder, text: String?) {

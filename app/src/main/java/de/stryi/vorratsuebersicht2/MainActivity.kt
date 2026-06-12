@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
         messageText += "\r\n\r\n"
         messageText +=
         String.format(this.resources.getString(R.string.Settings_LastBackupOn),
-            Tools.toString(lastBackupDay))
+            Tools.toHumanString(lastBackupDay))
 
         messageText += "\r\n"
         messageText +=
