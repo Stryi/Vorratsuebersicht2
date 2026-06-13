@@ -72,7 +72,7 @@ class CsvExport private constructor(
     private fun getStorageItemsAsCsvString(): StringBuilder {
         val header = StringBuilder()
             .append(
-                "StorageItemId|ArticleId|Name|Manufacturer|ArticleStorageName|" +
+                "StorageItemId|ArticleId|Name|Manufacturer|Category|SubCategory|ArticleStorageName|" +
                         "DurableInfinity|WarnInDays|Quantity|BestBefore|StorageName"
             )
             .appendLine()
@@ -86,6 +86,8 @@ class CsvExport private constructor(
             addField(row, item.articleId)
             addField(row, item.name)
             addField(row, item.manufacturer)
+            addField(row, item.category)
+            addField(row, item.subcategory)
             addField(row, item.articleStorageName)
             addField(row, item.durableInfinity)
             addField(row, item.warnInDays)
@@ -109,7 +111,7 @@ class CsvExport private constructor(
 
         val uri = FileProvider.getUriForFile(
             context,
-            "de.stryi.vorratsuebersicht2.provider",
+            "de.stryi.vorratsuebersicht.provider",
             file
         )
 

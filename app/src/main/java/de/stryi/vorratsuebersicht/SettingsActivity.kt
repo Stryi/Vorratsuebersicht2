@@ -323,7 +323,7 @@ class SettingsActivity : AppCompatActivity() {
             return
 
         val file = File(databasePath)
-        val uri = FileProvider.getUriForFile(this, "de.stryi.vorratsuebersicht2.provider", file)
+        val uri = FileProvider.getUriForFile(this, "de.stryi.vorratsuebersicht.provider", file)
 
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND

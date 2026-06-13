@@ -12,6 +12,8 @@ class StorageItemCsvExport {
     var articleId: Int = 0
     var name: String = ""
     var manufacturer: String = ""
+    var category: String = ""
+    var subcategory: String = ""
     var articleStorageName: String = ""
     var durableInfinity: Boolean = false
     var warnInDays: Int? = null
@@ -26,6 +28,8 @@ class StorageItemCsvExport {
             storageItem.articleId       = cursor.getIntOrNull("ArticleId") ?: 0
             storageItem.name            = cursor.getStringOrNull("Name") ?: ""
             storageItem.manufacturer    = cursor.getStringOrNull("Manufacturer") ?: ""
+            storageItem.category        = cursor.getStringOrNull("Category") ?: ""
+            storageItem.subcategory     = cursor.getStringOrNull("SubCategory") ?: ""
             storageItem.articleStorageName = cursor.getStringOrNull("ArticleStorageName") ?: ""
             storageItem.durableInfinity = cursor.getIntOrNull("DurableInfinity") == 1
             storageItem.warnInDays      = cursor.getIntOrNull("WarnInDays")

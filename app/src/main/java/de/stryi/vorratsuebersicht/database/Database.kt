@@ -845,6 +845,8 @@ object Database
                    StorageItem.ArticleId,
                    Name,
                    Manufacturer,
+                   Category,
+                   SubCategory,
                    Article.StorageName AS ArticleStorageName,
                    DurableInfinity,
                    WarnInDays,
