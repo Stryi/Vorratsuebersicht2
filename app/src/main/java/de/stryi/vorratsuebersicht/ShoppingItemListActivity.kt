@@ -72,6 +72,11 @@ class ShoppingItemListActivity : AppCompatActivity()
             binding.ShoppingItemListSwipeRefreshLayout.isRefreshing = false
         }
 
+        // FloatingActionButton Klick-Listener
+        binding.ShoppingItemListAddFab.setOnClickListener {
+            this.selectArticle()
+        }
+
         this.showShoppingList()
         this.loadSupermarketList()
     }
