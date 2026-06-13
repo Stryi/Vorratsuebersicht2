@@ -501,7 +501,13 @@ class MainActivity : AppCompatActivity() {
         val databases = AndroidDatabase.loadDatabaseFileListSafe(this)
 
         selectDatabase(databases) { selectedDatabase ->
-            Database.init(selectedDatabase)
+            var errorMessage = Database.init(selectedDatabase)
+            if (errorMessage != null)
+            {
+                Tools.showMessage(this, errorMessage)
+                return@selectDatabase
+            }
+
             Settings.putString("LastSelectedDatabase", selectedDatabase)
             this.showStorageInfoText()
             this.showDatabaseName(selectedDatabase)
