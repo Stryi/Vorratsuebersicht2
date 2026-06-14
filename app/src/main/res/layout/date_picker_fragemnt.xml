@@ -190,18 +190,22 @@
         <Button
             android:id="@+id/buttonOk"
             android:text="@string/App_Ok"
-            android:textColor="@color/Default_Text_Color"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_green_light"
+            android:background="@android:color/transparent"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_height="wrap_content"
-            android:layout_width="125dp" />
+            android:layout_width="wrap_content" />
 
         <Button
             android:id="@+id/buttonNoDate"
-            android:textColor="@color/Default_Text_Color"
-            android:text="Kein Datum"
-            android:backgroundTint="@android:color/holo_red_light"
+            android:text="@string/App_NoDate"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_red_light"
+            android:background="@android:color/transparent"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_height="wrap_content"
-            android:layout_width="175dp" />
+            android:layout_width="wrap_content" />
 
     </LinearLayout>
 

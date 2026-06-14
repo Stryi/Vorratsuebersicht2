@@ -32,7 +32,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
     ): View?
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.date_picker2_fragemnt, container, false)
+        return inflater.inflate(R.layout.date_picker_fragemnt, container, false)
     }
 
     override fun onStart() {

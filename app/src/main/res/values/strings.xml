@@ -19,6 +19,7 @@
     <string name="App_Search">Suchen</string>
     <string name="App_Rename">Umbenennen</string>
     <string name="App_NoEntry">[Kein Eintrag]</string>
+    <string name="App_NoDate">Kein Datum</string>
 
     <string name="App_ErrorOccurred">Fehler aufgetreten!</string>
     <string name="App_ChooseAction">Aktion wählen…</string>
