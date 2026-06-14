@@ -185,8 +185,8 @@ class SettingsActivity : AppCompatActivity() {
         binding.SettingsLogFile.text = Tools.getLogFileName()
         binding.SettingsLogFile.setOnClickListener { this.testException() }
 
-        // Log Datei an den Entwickler senden
-        binding.SettingsButtonSendLogFile.setOnClickListener { this.buttonSendLogFileClick() }
+        // LOG Datei anzeigen / Senden
+        binding.SettingsButtonShowLogFile.setOnClickListener { this.buttonShowLogFileClick() }
 
         // Lizenz
         binding.SettingsButtonLicenses.setOnClickListener { this.buttonLicenseClick() }
@@ -1025,6 +1025,12 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         return versionInfo
+    }
+
+    private fun buttonShowLogFileClick()
+    {
+        val intent = Intent(this, LogViewerActivity::class.java)
+        startActivity(intent)
     }
 
     private fun buttonSendLogFileClick()

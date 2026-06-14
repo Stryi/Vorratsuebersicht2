@@ -563,8 +563,8 @@
                 android:layout_marginStart="10dp" />
 
             <Button
-                android:id="@+id/SettingsButton_SendLogFile"
-                android:text="@string/Settings_SendLogFile"
+                android:id="@+id/SettingsButton_ShowLogFile"
+                android:text="@string/Settings_ShowLogFile"
                 android:textColor="#000000"
                 android:backgroundTint="#CCCCCC"
                 android:layout_width="match_parent"

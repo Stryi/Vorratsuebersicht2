@@ -2,6 +2,7 @@ package de.stryi.vorratsuebersicht.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.DatabaseErrorHandler
 import android.database.sqlite.SQLiteDatabase
 import androidx.core.database.sqlite.transaction
 import de.stryi.vorratsuebersicht.database.AndroidDatabase.SQLITE_FILENAME_DEMO
@@ -31,7 +32,14 @@ object Database
         try
         {
             val dbFile = File(databaseFilePath)
-            db = SQLiteDatabase.openDatabase(dbFile.path, null, SQLiteDatabase.OPEN_READWRITE)
+            db = SQLiteDatabase.openDatabase(
+                dbFile.path,
+                null,
+                SQLiteDatabase.OPEN_READWRITE,
+                DatabaseErrorHandler { database ->
+                    TRACE("DB", "Datenbank korrupt: ${database.path}")
+                }
+            )
         }
         catch (e: Exception)
         {
@@ -1170,6 +1178,9 @@ object Database
 
     fun getArticleCount() : Int
     {
+        if (db == null)
+            return 0
+
         val query = """
             SELECT COUNT(*) AS Quantity
             FROM Article""".trimIndent()

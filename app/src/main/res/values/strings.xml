@@ -137,6 +137,7 @@
 
     <string name="Settings_Support">Support</string>
     <string name="Settings_SendLogFile">LOG Einträge an Entwickler schicken</string>
+    <string name="Settings_ShowLogFile">LOG Einträge anzeigen / senden</string>
     <string name="Settings_SendLogFileMessage">
         LOG Einträge an den Entwickler schicken?
         \n\nIhre E-Mail Adresse wird dem Entwickler als \'Absender\' angezeigt.
@@ -361,6 +362,4 @@ http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="action_settings">Settings</string>
     <string name="Increase">erhöhen</string>
     <string name="Decrease">verringern</string>
-    <string name="loading">Loading...</string>
-
 </resources>
