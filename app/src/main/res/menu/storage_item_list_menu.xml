@@ -20,13 +20,13 @@
     <item android:id="@+id/StorageItemList_Add"
         android:icon="@drawable/add_circle_24px"
         android:title="@string/StorageItemList_Menu_Add"
-        app:iconTint="@color/Application_ActionBar_TextColor"
-        app:showAsAction="always" />
+        app:iconTint="?android:attr/textColorPrimary"
+        app:showAsAction="never" />
 
     <item android:id="@+id/ArticleList_Menu_Share"
         android:title="@string/App_Share"
         android:icon="@drawable/share_24px"
         app:iconTint="?android:attr/textColorPrimary"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>
