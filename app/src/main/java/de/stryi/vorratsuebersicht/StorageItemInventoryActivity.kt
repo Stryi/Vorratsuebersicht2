@@ -50,13 +50,10 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         binding = StorageItemInventoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        this.setSupportActionBar(binding.StorageItemInventoryAppBar)
 
         binding.StorageItemInventoryAppBar.setNavigationOnClickListener { finish() }
         binding.StorageItemInventoryAppBar.overflowIcon?.setTint(getColor(R.color.Application_ActionBar_TextColor))
@@ -459,7 +456,8 @@ class StorageItemInventoryActivity : AppCompatActivity() {
             }
 
         }
-        dialog.show()
+        val alertDialog = dialog.show()
+        alertDialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
     }
 
     fun saveStorageItem(storageItem: StorageItem)
