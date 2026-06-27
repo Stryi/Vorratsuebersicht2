@@ -55,6 +55,8 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         binding = StorageItemInventoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        this.setSupportActionBar(binding.StorageItemInventoryAppBar)
+
         binding.StorageItemInventoryAppBar.setNavigationOnClickListener { finish() }
         binding.StorageItemInventoryAppBar.overflowIcon?.setTint(getColor(R.color.Application_ActionBar_TextColor))
 
