@@ -911,8 +911,8 @@ object Database
         {
             query += " AND (IFNULL(StorageItem.StorageName, '') = '')"
         }
-        query += " GROUP BY StorageItem.StorageName, BestBefore"
-        query += " ORDER BY StorageItem.StorageName, BestBefore"
+        query += " GROUP BY BestBefore"
+        query += " ORDER BY BestBefore"
 
         val cursor = db!!.rawQuery(query.trimIndent(), parameters.toTypedArray())
         cursor.use {
