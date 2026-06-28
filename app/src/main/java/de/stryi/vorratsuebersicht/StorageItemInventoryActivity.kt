@@ -484,7 +484,10 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         val storageItem = StorageItem()
         storageItem.articleId   = this.article.articleId
         storageItem.quantity    = 1.00
-        storageItem.bestBefore  = LocalDate.now()
+        if (!article.durableInfinity)
+        {
+            storageItem.bestBefore  = LocalDate.now()
+        }
         storageItem.storageName = storageName
         storageItem.isChanged   = true
 
