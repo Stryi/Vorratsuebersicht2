@@ -37,7 +37,7 @@ object Database
                 null,
                 SQLiteDatabase.OPEN_READWRITE,
                 DatabaseErrorHandler { database ->
-                    TRACE("DB", "Datenbank korrupt: ${database.path}")
+                    TRACE("DB: Datenbank korrupt: ${database.path}")
                 }
             )
         }
