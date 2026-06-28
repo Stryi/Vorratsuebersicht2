@@ -119,6 +119,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
         this.showYears()
         this.updateMonths()
         this.updateDays()
+        this.updateMaxMonthDays()
     }
 
     private fun onPrevYearCLicked() {
