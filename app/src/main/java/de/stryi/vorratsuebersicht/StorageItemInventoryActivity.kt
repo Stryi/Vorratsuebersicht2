@@ -172,8 +172,12 @@ class StorageItemInventoryActivity : AppCompatActivity() {
                 return
         }
 
-        this.setResult(RESULT_OK)
-
+        if (this.isChanged)
+        {
+            val resultIntent = Intent()
+            resultIntent.putExtra("ArticleId", this.articleId)
+            this.setResult(RESULT_OK, resultIntent)
+        }
         super.finish()
     }
 
@@ -512,7 +516,14 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         val storageItem = StorageItem()
         storageItem.articleId = this.article.articleId
         storageItem.quantity    = this.quantity
-        storageItem.bestBefore  = LocalDate.now()
+        if (this.article.durableInfinity)
+        {
+            storageItem.bestBefore  = null
+        }
+        else
+        {
+            storageItem.bestBefore  = LocalDate.now()
+        }
         storageItem.storageName = storageName
         storageItem.isChanged   = true
 

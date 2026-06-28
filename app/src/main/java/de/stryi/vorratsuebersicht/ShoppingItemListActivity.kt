@@ -295,7 +295,7 @@ class ShoppingItemListActivity : AppCompatActivity()
                     storageInventory.putExtra("ArticleId", shoppingItem.articleId)
                     storageInventory.putExtra("EditMode", true)
                     storageInventory.putExtra("Quantity", shoppingItemCount)
-                    startActivity(storageInventory)
+                    storageItemInventoryLauncher.launch(storageInventory)
                 }
                 6 -> { // Artikelangaben
                     val articleDetails = Intent(this, ArticleDetailsActivity::class.java)
@@ -415,6 +415,23 @@ class ShoppingItemListActivity : AppCompatActivity()
                     return@registerForActivityResult
 
                 Database.addToShoppingList(id, 1.00)
+                this.showShoppingList()
+                this.loadSupermarketList()
+            }
+        }
+
+    private val storageItemInventoryLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+
+                if (result.data == null)
+                    return@registerForActivityResult
+
+                val id = result.data!!.getIntExtra("ArticleId", -1)
+                if (id == -1)
+                    return@registerForActivityResult
+
+                Database.removeFromShoppingList(id)
                 this.showShoppingList()
                 this.loadSupermarketList()
             }
