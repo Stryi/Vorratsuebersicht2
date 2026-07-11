@@ -1,6 +1,7 @@
 package de.stryi.vorratsuebersicht
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -14,11 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import de.stryi.vorratsuebersicht.ArticleListViewAdapter.ArticleViewHolder
 import de.stryi.vorratsuebersicht.database.Database
 import de.stryi.vorratsuebersicht.databinding.ArticleListBinding
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
 import de.stryi.vorratsuebersicht.tools.CategoryItem
 import de.stryi.vorratsuebersicht.tools.Tools
 import java.time.LocalDateTime
@@ -204,6 +208,10 @@ class ArticleListActivity : AppCompatActivity() {
             this.lastSearchText)
 
         val adapter = ArticleListViewAdapter(articleList, this::onOpenArticleDetails)
+        adapter.optionSelect =
+            { articleId, anchor ->
+                this.showOptionPopUp(articleId, anchor)
+            }
 
         binding.ArticleList.layoutManager = LinearLayoutManager(this)
         binding.ArticleList.adapter = adapter
@@ -295,7 +303,6 @@ class ArticleListActivity : AppCompatActivity() {
          }
      }
 
-
     fun shareList()
     {
         if (MainActivity.IsGooglePlayPreLaunchTestMode)
@@ -338,5 +345,54 @@ class ArticleListActivity : AppCompatActivity() {
         intent.type = "text/plain"
 
         startActivity(intent)
+    }
+
+    @SuppressLint("RestrictedApi")
+    fun showOptionPopUp(articleId: Int, anchor: ArticleViewHolder)
+    {
+        val popupMenu = PopupMenu(this, anchor.option)
+        popupMenu.menuInflater.inflate(R.menu.article_list_contextmenu, popupMenu.menu)
+
+        if (popupMenu.menu is MenuBuilder) {
+            (popupMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.ArticleList_ContextMenu_Lagerbestand -> {
+                    val storageDetails = Intent(anchor.itemView.context, StorageItemInventoryActivity::class.java)
+                    storageDetails.putExtra("ArticleId", articleId)
+                    storageDetailsLauncher.launch(storageDetails)
+                    true
+                }
+                R.id.ArticleList_ContextMenu_AufEinkaufszettel -> {
+                    AddToShoppingListDialog.showDialog(
+                        anchor.itemView.context as Activity,
+                        articleId,
+                        anchor.minQuantity,
+                        anchor.prefQuantity,
+                        { refreshArticleList() }
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private val storageDetailsLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { result ->
+        if (result.resultCode == RESULT_OK)
+        {
+            this.refreshArticleList()
+        }
+    }
+
+    private fun refreshArticleList()
+    {
+        listViewState = binding.ArticleList.layoutManager?.onSaveInstanceState()
+        this.showArticleList()
+        binding.ArticleList.layoutManager?.onRestoreInstanceState(listViewState)
     }
 }

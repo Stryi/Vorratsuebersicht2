@@ -1,21 +1,15 @@
 package de.stryi.vorratsuebersicht
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.widget.PopupMenu
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.recyclerview.widget.RecyclerView
 import de.stryi.vorratsuebersicht.database.Database
 import de.stryi.vorratsuebersicht.database.Records.ArticleInfo
-import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
 import de.stryi.vorratsuebersicht.tools.Tools
 
 
@@ -27,6 +21,8 @@ class StorageItemViewAdapter(
 ) :
     RecyclerView.Adapter<StorageItemViewAdapter.StorageItemViewHolder>()
 {
+    var optionSelect: ((Int, StorageItemViewHolder) -> Unit)? = null
+
     class StorageItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val image: ImageView = view.findViewById(R.id.StorageItemListView_Image)
@@ -108,52 +104,24 @@ class StorageItemViewAdapter(
             onItemClick(storageItem.articleId)
         }
 
-        holder.itemView.setOnLongClickListener {
-            this.showContextMenu(holder)
+        holder.itemView.setOnLongClickListener { _ ->
+            this.showContextPopup(holder)
             true
         }
 
-        holder.option.setOnClickListener {
-            showContextMenu(holder)
+        holder.option.setOnClickListener { _ ->
+            this.showContextPopup(holder)
         }
+    }
+
+    fun showContextPopup(holder: StorageItemViewHolder)
+    {
+        val articleId = holder.itemView.tag as Int
+        this.optionSelect?.invoke(articleId, holder)
     }
 
     override fun getItemCount(): Int {
         return storageItems.size
-    }
-
-    @SuppressLint("RestrictedApi")
-    fun showContextMenu(holder: StorageItemViewHolder)
-    {
-        val popupMenu = PopupMenu(holder.itemView.context, holder.option)
-        popupMenu.menuInflater.inflate(R.menu.storage_item_list_contextmenu, popupMenu.menu)
-
-        if (popupMenu.menu is MenuBuilder) {
-            (popupMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
-        }
-
-        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
-            val articleId =  holder.itemView.tag as Int
-            when (menuItem.itemId) {
-                R.id.StorageItemList_ContextMenu_Artikelangaben -> {
-                    val storageDetails = Intent(holder.itemView.context, ArticleDetailsActivity::class.java)
-                    storageDetails.putExtra("ArticleId", articleId)
-                    holder.itemView.context.startActivity(storageDetails)
-                    true
-                }
-                R.id.StorageItemList_ContextMenu_AufEinkaufszettel -> {
-                    AddToShoppingListDialog.showDialog(
-                        holder.itemView.context as Activity,
-                        articleId,
-                        holder.minQuantity,
-                        holder.prefQuantity,
-                        null)
-                    true
-                }
-                else -> false
-            }
-        }
-        popupMenu.show()
     }
 
     fun loadBestBeforeInformation(storageItem: ArticleInfo, holder: StorageItemViewHolder)

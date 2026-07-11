@@ -2,6 +2,7 @@ package de.stryi.vorratsuebersicht
 
 import StockStatistic
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
@@ -14,12 +15,15 @@ import android.widget.SearchView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import de.stryi.vorratsuebersicht.StorageItemViewAdapter.StorageItemViewHolder
 import de.stryi.vorratsuebersicht.database.Database
 import de.stryi.vorratsuebersicht.databinding.StorageItemListBinding
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
 import de.stryi.vorratsuebersicht.tools.Settings
 import de.stryi.vorratsuebersicht.tools.Tools
 import kotlinx.coroutines.Dispatchers
@@ -274,6 +278,10 @@ class StorageItemListActivity : AppCompatActivity() {
                 storageNameFilter,
                 withoutStorage
             )
+            adapter.optionSelect =
+                { articleId, control ->
+                    this@StorageItemListActivity.showOptionPopUp(articleId, control)
+                }
 
             binding.StorageItemView.layoutManager = LinearLayoutManager(this@StorageItemListActivity)
             binding.StorageItemView.adapter = adapter
@@ -372,4 +380,53 @@ class StorageItemListActivity : AppCompatActivity() {
                 //binding.StorageItemView.layoutManager?.onRestoreInstanceState(listViewState)
             }
         }
+
+    @SuppressLint("RestrictedApi")
+    fun showOptionPopUp(articleId: Int, holder: StorageItemViewHolder)
+    {
+        val popupMenu = PopupMenu(holder.itemView.context, holder.option)
+        popupMenu.menuInflater.inflate(R.menu.storage_item_list_contextmenu, popupMenu.menu)
+
+        if (popupMenu.menu is MenuBuilder) {
+            (popupMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.StorageItemList_ContextMenu_Artikelangaben -> {
+                    val articleDetails = Intent(holder.itemView.context, ArticleDetailsActivity::class.java)
+                    articleDetails.putExtra("ArticleId", articleId)
+                    detailLauncher.launch(articleDetails)
+
+                    true
+                }
+                R.id.StorageItemList_ContextMenu_AufEinkaufszettel -> {
+                    AddToShoppingListDialog.showDialog(
+                        holder.itemView.context as Activity,
+                        articleId,
+                        holder.minQuantity,
+                        holder.prefQuantity,
+                        { refreshStorageItemList() }
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private val detailLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                refreshStorageItemList()
+            }
+        }
+
+    private fun refreshStorageItemList()
+    {
+        listViewState = binding.StorageItemView.layoutManager?.onSaveInstanceState()
+        this.showStorageItemList()
+        binding.StorageItemView.layoutManager?.onRestoreInstanceState(listViewState)
+    }
 }
