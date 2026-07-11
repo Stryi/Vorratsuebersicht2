@@ -84,7 +84,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
         binding.StorageItemQuantityAddArticle.setOnClickListener { this.addArticle() }
 
-        binding.StorageItemQuantitySelectStorage.setOnClickListener { this.selectStorage() }
+        binding.StorageItemQuantitySelectStorage.setOnClickListener { this.selectStorageForCreation() }
         binding.StorageItemQuantityStepButton.setOnClickListener    { this.setQuantityStep() }
 
         binding.StorageItemQuantityImage.setOnClickListener         { this.goToPicture()}
@@ -97,7 +97,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
         if (this.quantity > 0.00)
         {
-            this.addArticleWithQuantity()
+            this.addArticle()
         }
     }
 
@@ -294,7 +294,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun selectStorage() {
+    private fun selectStorageForCreation() {
         val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
         builder.setTitle(R.string.StorageItemQuantityList_StorageForNew)
 
@@ -418,11 +418,12 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun changeDate(storageItem: StorageItem) {
+    private fun changeDate(storageItem: StorageItem, onDateSelected: (() -> Unit)? = null) {
         val datePickerFragment = DatePickerFragment(storageItem.bestBefore)
         datePickerFragment.onResult = { date ->
             storageItem.bestBefore = date
             this.saveStorageItem(storageItem)
+            onDateSelected?.invoke()
         }
         datePickerFragment.show(supportFragmentManager, "DatePicker")
     }
@@ -459,6 +460,11 @@ class StorageItemInventoryActivity : AppCompatActivity() {
                 storageItem.quantity = neueAnzahl
 
                 this.saveStorageItem(storageItem)
+
+                if (this.quantity >= 1)
+                {
+                    this.quantity -= neueAnzahl
+                }
             }
 
         }
@@ -477,6 +483,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         {
             // Änderung sofort speichern.
             Database.updateStorageItemQuantity(storageItem)
+            this.isChanged = true
         }
 
         binding.StorageItemQuantityView.adapter?.notifyDataSetChanged()
@@ -506,32 +513,10 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
         if (!this.article.durableInfinity)
         {
-            this.changeDate(storageItem)
+            this.changeDate(storageItem, onDateSelected =
+                {
+                    this.changeQuantity(storageItem)
+                })
         }
-    }
-
-    private fun addArticleWithQuantity() {
-        val storageName = binding.StorageItemQuantityStorageText.text.toString().trimEnd()
-
-        val storageItem = StorageItem()
-        storageItem.articleId = this.article.articleId
-        storageItem.quantity    = this.quantity
-        if (this.article.durableInfinity)
-        {
-            storageItem.bestBefore  = null
-        }
-        else
-        {
-            storageItem.bestBefore  = LocalDate.now()
-        }
-        storageItem.storageName = storageName
-        storageItem.isChanged   = true
-
-        val adapter = binding.StorageItemQuantityView.adapter as StorageItemInventoryViewAdapter
-        adapter.addStorageItem(storageItem)
-        adapter.notifyDataSetChanged()
-
-        this.changeQuantity(storageItem)
-
     }
 }
