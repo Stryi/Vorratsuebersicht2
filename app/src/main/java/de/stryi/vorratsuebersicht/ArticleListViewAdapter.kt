@@ -1,15 +1,20 @@
 package de.stryi.vorratsuebersicht
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import de.stryi.vorratsuebersicht.database.Records.Article
 import de.stryi.vorratsuebersicht.database.Database
+import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
 import kotlinx.coroutines.*
 
 class ArticleListViewAdapter(
@@ -19,6 +24,7 @@ class ArticleListViewAdapter(
     RecyclerView.Adapter<ArticleListViewAdapter.ArticleViewHolder>()
 {
     var optionSelect: ((Int, ArticleViewHolder) -> Unit)? = null
+    var optionSelected: ((Int, Int) -> Unit)? = null
     private val adapterScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
     class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -79,12 +85,12 @@ class ArticleListViewAdapter(
         }
 
         holder.itemView.setOnLongClickListener {
-            showContextPopup(holder)
+            showContextMenu(holder)
             true
         }
 
         holder.articleListViewOption.setOnClickListener {
-            showContextPopup(holder)
+            showContextMenu(holder)
         }
 
         // Bild asynchron laden
@@ -132,10 +138,49 @@ class ArticleListViewAdapter(
         adapterScope.cancel()
     }
 
-    fun showContextPopup(holder: ArticleViewHolder)
+    @android.annotation.SuppressLint("RestrictedApi")
+    fun showContextMenu(holder: ArticleViewHolder) {
+        val popupMenu = PopupMenu(holder.itemView.context, holder.option)
+        popupMenu.menuInflater.inflate(R.menu.article_list_contextmenu, popupMenu.menu)
+
+        if (popupMenu.menu is MenuBuilder) {
+            (popupMenu.menu as MenuBuilder).setOptionalIconsVisible(true)
+        }
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            val articleId = holder.itemView.tag as Int
+            when (menuItem.itemId) {
+                R.id.ArticleList_ContextMenu_Lagerbestand -> {
+                    
+                    this.optionSelected?.invoke(articleId, 1)
+
+                    val storageDetails = Intent(holder.itemView.context, StorageItemInventoryActivity::class.java)
+                    storageDetails.putExtra("ArticleId", articleId)
+                    holder.itemView.context.startActivity(storageDetails)
+                    true
+                }
+                R.id.ArticleList_ContextMenu_AufEinkaufszettel -> {
+
+                    this.optionSelected?.invoke(articleId, 2)
+
+                    AddToShoppingListDialog.showDialog(
+                        holder.itemView.context as Activity,
+                        articleId,
+                        holder.minQuantity,
+                        holder.prefQuantity,
+                        { refreshListAction(articleId, 2) }
+                    )
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
+    private fun refreshListAction(articleId: Int, optionId: Int)
     {
-        val articleId = holder.itemView.tag as Int
-        this.optionSelect?.invoke(articleId, holder)
+        this.optionSelected?.invoke(articleId, optionId)
     }
 
     override fun getItemCount(): Int = articles.size

@@ -716,7 +716,7 @@ class ArticleDetailsActivity : AppCompatActivity() {
 
         val file = File(dir, "temp_photo.jpg")
 
-        return FileProvider.getUriForFile(this, "de.stryi.vorratsuebersicht.provider", file)
+        return FileProvider.getUriForFile(this, "de.stryi.vorratsuebersicht2.provider", file)
     }
 
     // Launcher für die Kamera-Foto-Aufnahme
