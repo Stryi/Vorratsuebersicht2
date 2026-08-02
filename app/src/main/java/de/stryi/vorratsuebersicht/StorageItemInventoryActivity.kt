@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.stryi.vorratsuebersicht.database.Database
@@ -23,6 +24,7 @@ import de.stryi.vorratsuebersicht.database.Records.StorageItem
 import de.stryi.vorratsuebersicht.databinding.StorageItemInventoryBinding
 import de.stryi.vorratsuebersicht.tools.AddToShoppingListDialog
 import de.stryi.vorratsuebersicht.tools.Tools
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 
@@ -394,10 +396,8 @@ class StorageItemInventoryActivity : AppCompatActivity() {
             storages.add(selectedStorage)
         }
 
-        if (storages.isEmpty())
-            return
-
         storages.add(0, "[Kein Lagerort]")
+        storages.add(1, "[Neuen Lagerort eingeben]")
 
         val adapter = ArrayAdapter(
             this,
@@ -408,12 +408,29 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
         builder.setTitle(R.string.StorageItemQuantityList_SelectStorage)
         builder.setAdapter(adapter) { _, which ->
-            if (which == 0)
+            if (which == 0) {
                 storageItem.storageName = null
-            else
-                storageItem.storageName = storages[which]
+                this.saveStorageItem(storageItem)
+            } else if (which == 1) {
+                lifecycleScope.launch {
+                    val newStorageName = Tools.askForText(
+                        this@StorageItemInventoryActivity,
+                        "Lager",
+                        "Name vom Lagerort",
+                        ""
+                    )
+                    if (newStorageName != null) {
 
-            this.saveStorageItem(storageItem)
+                        // Den neuen Lagernamen in die Liste der Läger hinzufügen.
+
+                        storageItem.storageName = newStorageName
+                    }
+                    this@StorageItemInventoryActivity.saveStorageItem(storageItem)
+                }
+            } else {
+                storageItem.storageName = storages[which]
+                this.saveStorageItem(storageItem)
+            }
         }
         builder.show()
     }
@@ -448,7 +465,9 @@ class StorageItemInventoryActivity : AppCompatActivity() {
         input.requestFocus()
         input.setSelection(0, input.text.length)
         dialog.setView(input)
-        dialog.setNegativeButton(R.string.App_Cancel) { _, _ -> }
+        dialog.setNegativeButton(R.string.App_Cancel) { _, _ ->
+            this.changeStorage(storageItem)
+        }
         dialog.setPositiveButton(R.string.App_Ok) { _, _ ->
             if (input.text.isNullOrEmpty())
                 input.setText("0")
@@ -460,6 +479,8 @@ class StorageItemInventoryActivity : AppCompatActivity() {
                 storageItem.quantity = neueAnzahl
 
                 this.saveStorageItem(storageItem)
+
+                this.changeStorage(storageItem)
 
                 if (this.quantity >= 1)
                 {
