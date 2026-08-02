@@ -387,7 +387,7 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
     private fun changeStorage(storageItem: StorageItem) {
 
-        val storages = Database.getStorageNames()
+        val storages = this.storages.toMutableList()
 
         val selectedStorage = binding.StorageItemQuantityStorageText.text.toString()
 
@@ -420,8 +420,19 @@ class StorageItemInventoryActivity : AppCompatActivity() {
                         ""
                     )
                     if (newStorageName != null) {
+                        if (!this@StorageItemInventoryActivity.storages.contains(newStorageName)) {
+                            val mutableStorages = this@StorageItemInventoryActivity.storages.toMutableList()
+                            mutableStorages.add(newStorageName)
+                            mutableStorages.sort()
+                            this@StorageItemInventoryActivity.storages = mutableStorages
 
-                        // Den neuen Lagernamen in die Liste der Läger hinzufügen.
+                            val storageAdapter = ArrayAdapter(
+                                this@StorageItemInventoryActivity,
+                                android.R.layout.simple_dropdown_item_1line,
+                                this@StorageItemInventoryActivity.storages
+                            )
+                            binding.StorageItemQuantityStorageText.setAdapter(storageAdapter)
+                        }
 
                         storageItem.storageName = newStorageName
                     }
@@ -480,7 +491,12 @@ class StorageItemInventoryActivity : AppCompatActivity() {
 
                 this.saveStorageItem(storageItem)
 
-                this.changeStorage(storageItem)
+                val defaultStorageName = binding.StorageItemQuantityStorageText.text.toString().trimEnd()
+
+                if (defaultStorageName.isNullOrEmpty())
+                {
+                    this.changeStorage(storageItem)
+                }
 
                 if (this.quantity >= 1)
                 {
