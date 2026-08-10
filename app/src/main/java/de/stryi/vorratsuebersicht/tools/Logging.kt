@@ -16,6 +16,7 @@ object Logging {
 
     fun InitializeLogFile(context: Context)
     {
+        // Beispiel: /storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/cache/Vue_2026.08.10.log
         logFileName = getCurrentLogFileName(context)
 
         deleteOldLogFiles(context)
@@ -40,6 +41,7 @@ object Logging {
 
     fun logToFile(text: String) {
 
+        // Beispiel: /storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/cache/Vue_2026.08.10.log
         if (logFileName.isEmpty())
             return
 
@@ -87,6 +89,7 @@ object Logging {
 
     fun getLogFileList(context: Context): Array<String> {
 
+        // Beispiel: /data/user/0/de.stryi.vorratsuebersicht2/files
         var logFilePath = context.filesDir.absolutePath
 
         val sortedList = mutableListOf<String>()
@@ -98,8 +101,11 @@ object Logging {
 
         unsorted?.forEach { sortedList.add(it.absolutePath) }
 
+        // Beispiel: "/storage/emulated/0/Android/data/de.stryi.vorratsuebersicht2/cache"
+        //           "/storage/0000-0000/Android/data/de.stryi.vorratsuebersicht2/cache"
+        // Wenn keine SD Karte, dann nur der erste Eintrag.
         val cacheDirs = context.externalCacheDirs
-        if (cacheDirs != null && cacheDirs.size > 1) {
+        if (cacheDirs != null && cacheDirs.size > 0) {
 
             logFilePath = cacheDirs[0].absolutePath
             val cacheDir = File(logFilePath)
