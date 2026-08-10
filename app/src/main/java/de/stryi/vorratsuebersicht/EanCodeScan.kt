@@ -48,8 +48,8 @@ class EanCodeScan : DialogFragment() {
             override fun possibleResultPoints(resultPoints: List<ResultPoint>) {}
         })
 
-        val cameraId = Settings.getBoolean("UseFrontCameraForEANScan", true)
-        barcodeView.cameraSettings.requestedCameraId = if (cameraId) 0 else 1
+        val cameraId = Settings.getBoolean("UseFrontCameraForEANScan", false)
+        barcodeView.cameraSettings.requestedCameraId = if (cameraId) 1 else 0
 
         val buttonFlash = view.findViewById<Button>(R.id.buttonZxingFlashOnOff)
         buttonFlash.setOnClickListener {

@@ -119,7 +119,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.SettingsButtonDatabaseDelete.setOnClickListener { this.buttonDeleteDbClick() }
 
         // EAN Scann (Benutze Frontkamera)
-        binding.SettingsButtonEANScanFrontCamera.isChecked = Settings.getBoolean("UseFrontCameraForEANScan", true)
+        binding.SettingsButtonEANScanFrontCamera.isChecked = Settings.getBoolean("UseFrontCameraForEANScan", false)
         binding.SettingsButtonEANScanFrontCamera.setOnCheckedChangeListener { _, _ -> this.onEANScanFrontCameraChecked() }
 
         // -------------------------------------------
