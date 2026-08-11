@@ -40,6 +40,8 @@ object Database
                     TRACE("DB: Datenbank korrupt: ${database.path}")
                 }
             )
+
+            this.checkAndUpgradeSchema()
         }
         catch (e: Exception)
         {
@@ -1527,5 +1529,67 @@ object Database
             WHERE StorageName = ?
         """.trimIndent()
         db!!.execSQL(updateArticle, arrayOf(newStorageName, oldStorageName))
+    }
+
+    private fun checkAndUpgradeSchema() {
+        if (db == null) return
+
+        try {
+
+            // Update 4.00: Extra Tabelle für Bilder
+            if (!isTableInDatabase("ArticleImage"))
+            {
+                db!!.execSQL(
+                    "CREATE TABLE [ArticleImage] (" +
+                    " [ImageId] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    " [ArticleId] INTEGER NOT NULL," +
+                    " [Type] INTEGER NOT NULL," +         // 0 - Artikelbild(-er), 1 - z.B. Rüchsicht, 3 - Zutaten
+                    " [CreatedAt] DATETIME NOT NULL," +   // Zum Sortieren gedacht
+                    " [ImageSmall] IMAGE," +
+                    " [ImageLarge] IMAGE);")
+            }
+
+            // Update 4.10: Gekauft in Einkaufsliste
+            if (!isFieldInTheTable("ShoppingList", "Bought"))
+            {
+                db!!.execSQL("ALTER TABLE ShoppingList ADD COLUMN [Bought] BOOLEAN")
+            }
+
+            // Update 4.30
+            if (!isFieldInTheTable("StorageItem", "StorageName")) {
+                db!!.execSQL("ALTER TABLE StorageItem ADD COLUMN [StorageName] TEXT")
+            }
+        } catch (e: Exception) {
+            TRACE("DB: Fehler bei Schema-Upgrade: ${e.message}")
+        }
+    }
+
+    private fun isFieldInTheTable(tableName: String, fieldName: String): Boolean
+    {
+        val cursor = db!!.rawQuery("PRAGMA table_info($tableName)", null)
+        cursor.use {
+            val nameIndex = it.getColumnIndex("name")
+            while (it.moveToNext())
+            {
+                val name = it.getString(nameIndex)
+                if (name.equals(fieldName, ignoreCase = true))
+                {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
+    fun isTableInDatabase(tableName: String): Boolean
+    {
+        if (db == null)
+            return false
+
+        val query = "SELECT name FROM sqlite_master WHERE type='table' AND name=?"
+        val cursor = db!!.rawQuery(query, arrayOf(tableName))
+        cursor.use {
+            return it.count > 0
+        }
     }
 }
