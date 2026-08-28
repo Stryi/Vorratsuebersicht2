@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.DatabaseErrorHandler
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import androidx.core.database.sqlite.transaction
 import de.stryi.vorratsuebersicht.database.AndroidDatabase.SQLITE_FILENAME_DEMO
 import de.stryi.vorratsuebersicht.database.Records.Article
@@ -1539,6 +1540,8 @@ object Database
             // Update 4.00: Extra Tabelle für Bilder
             if (!isTableInDatabase("ArticleImage"))
             {
+                TRACE("Creating ArticleImage table")
+
                 db!!.execSQL(
                     "CREATE TABLE [ArticleImage] (" +
                     " [ImageId] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -1547,21 +1550,60 @@ object Database
                     " [CreatedAt] DATETIME NOT NULL," +   // Zum Sortieren gedacht
                     " [ImageSmall] IMAGE," +
                     " [ImageLarge] IMAGE);")
+
+                checkAndMoveArticleImages()
             }
 
             // Update 4.10: Gekauft in Einkaufsliste
             if (!isFieldInTheTable("ShoppingList", "Bought"))
             {
+                TRACE("Update 4.10: Gekauft in Einkaufsliste")
                 db!!.execSQL("ALTER TABLE ShoppingList ADD COLUMN [Bought] BOOLEAN")
             }
 
             // Update 4.30
-            if (!isFieldInTheTable("StorageItem", "StorageName")) {
+            if (!isFieldInTheTable("StorageItem", "StorageName"))
+            {
+                TRACE("Update 4.30: StorageName im StorageItem")
                 db!!.execSQL("ALTER TABLE StorageItem ADD COLUMN [StorageName] TEXT")
             }
         } catch (e: Exception) {
             TRACE("DB: Fehler bei Schema-Upgrade: ${e.message}")
         }
+    }
+
+    private fun checkAndMoveArticleImages() {
+
+        val cmdCopyImages =
+            "INSERT INTO ArticleImage (ArticleId, Type, ImageSmall, ImageLarge, CreatedAt)" +
+            " SELECT ArticleId, 0,  Image AS ImageSmall, ImageLarge, DATETIME('now')" +
+            " FROM Article" +
+            " WHERE Article.Image IS NOT NULL" +
+            " AND Article.ArticleId NOT IN (SELECT ArticleId FROM ArticleImage)" +
+            " ORDER BY Name COLLATE NOCASE"
+
+        val cmdClearImages =
+            "UPDATE Article" +
+            " SET Image = NUll, ImageLarge = NULL" +
+            " WHERE ArticleId IN (SELECT ArticleId FROM ArticleImage)"
+
+        TRACE("Moving Images to ArticleImage")
+
+        try {
+            db!!.beginTransaction()
+            db!!.execSQL(cmdCopyImages)
+            db!!.execSQL(cmdClearImages)
+            db!!.setTransactionSuccessful()
+        }
+        catch (e: Exception)
+        {
+            Log.e("stryi", e.toString())
+            TRACE(e.message)
+        }
+        finally {
+            db!!.endTransaction()
+        }
+
     }
 
     private fun isFieldInTheTable(tableName: String, fieldName: String): Boolean
