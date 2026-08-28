@@ -130,6 +130,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/spinner_arrow_tint"
                 android:hint="@string/ArticleDetails_Category_Hint" />
 
             <TextView

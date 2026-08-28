@@ -35,4 +35,6 @@
     <!-- Hint Farbe 50% transparent -->
     <color name="hint_color">#50000000</color>
 
+    <color name="spinner_arrow_tint">#000000</color>
+
 </resources>
