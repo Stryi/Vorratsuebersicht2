@@ -10,8 +10,8 @@ android {
     defaultConfig {
         applicationId = "de.stryi.vorratsuebersicht2"
         minSdk = 28
-        targetSdk = 35
-        versionCode = 151
+        targetSdk = 36
+        versionCode = 152
         versionName = "9.00"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -47,7 +47,6 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.zxing.android.embedded)
     implementation(libs.core)
     implementation(libs.zxing.android.embedded)
     implementation(libs.androidx.activity)
