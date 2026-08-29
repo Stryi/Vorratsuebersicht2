@@ -4,14 +4,14 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "de.stryi.vorratsuebersicht2",
+  "applicationId": "de.stryi.vorratsuebersicht",
   "variantName": "release",
   "elements": [
     {
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 153,
+      "versionCode": 154,
       "versionName": "9.00",
       "outputFile": "app-release.apk"
     }

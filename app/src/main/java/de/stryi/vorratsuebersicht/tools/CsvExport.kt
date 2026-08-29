@@ -111,7 +111,7 @@ class CsvExport private constructor(
 
         val uri = FileProvider.getUriForFile(
             context,
-            "de.stryi.vorratsuebersicht2.provider",
+            "de.stryi.vorratsuebersicht.provider",
             file
         )
 

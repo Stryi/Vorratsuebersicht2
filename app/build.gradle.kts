@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "de.stryi.vorratsuebersicht2"
+        applicationId = "de.stryi.vorratsuebersicht"
         minSdk = 28
         targetSdk = 36
         versionCode = 154

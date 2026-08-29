@@ -7,5 +7,5 @@ https://fonts.google.com/icons?selected=Material+Symbols+Outlined:sort:FILL@1;wg
 
 Beta Test Version
 
-https://play.google.com/store/apps/details?id=de.stryi.vorratsuebersicht2
+https://play.google.com/store/apps/details?id=de.stryi.vorratsuebersicht
 

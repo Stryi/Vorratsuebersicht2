@@ -62,7 +62,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="de.stryi.vorratsuebersicht2.provider"
+            android:authorities="de.stryi.vorratsuebersicht.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
