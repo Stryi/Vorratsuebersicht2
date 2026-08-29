@@ -1,6 +1,7 @@
-Version 9.00 (Code Version 149)
+Version 9.00 (Code Version 154)
 =====================================
 
+C225 - Lagerbestand löschen und umbenennen integriert
 C224 - Neue Spalten 'Category' und 'SubCategory' beim CSV Export 'Lagerbestand'
 
 Version 8.21 (Code Version 148)

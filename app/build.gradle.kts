@@ -11,7 +11,7 @@ android {
         applicationId = "de.stryi.vorratsuebersicht2"
         minSdk = 28
         targetSdk = 36
-        versionCode = 153
+        versionCode = 154
         versionName = "9.00"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
