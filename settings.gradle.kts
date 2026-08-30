@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Vorratsübersicht (Neu)"
+rootProject.name = "Vorratsübersicht"
 include(":app")
  
