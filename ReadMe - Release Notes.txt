@@ -1,4 +1,4 @@
-Version 9.00 (Code Version 154)
+Version 9.00 (Code Version 156)
 =====================================
 
 C225 - Lagerbestand löschen und umbenennen integriert

@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.core.graphics.toColorInt
 import java.time.LocalDate
 import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 
 class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
 
@@ -120,6 +121,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
         this.updateMonths()
         this.updateDays()
         this.updateMaxMonthDays()
+        this.updateSelectedDateDisplay()
     }
 
     private fun onPrevYearCLicked() {
@@ -146,6 +148,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
         this.showYears()
         this.updateDays()
         this.updateMaxMonthDays()
+        this.updateSelectedDateDisplay()
     }
 
     fun onMonthClicked(view: View)
@@ -162,6 +165,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
         this.updateMonths()
         this.updateDays()
         this.updateMaxMonthDays()
+        this.updateSelectedDateDisplay()
     }
 
     fun onDayClicked(view: View)
@@ -170,6 +174,7 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
         val day = dayButton.text.toString().toInt()
         this.date = LocalDate.of(this.date?.year!!, this.date?.month!!, day)
         this.updateDays()
+        this.updateSelectedDateDisplay()
     }
 
     private fun setYear(yearButton: Int, year: Int) {
@@ -314,6 +319,16 @@ class DatePickerFragment(var date: LocalDate?) : DialogFragment() {
     fun daysInMonth(year: Int, month: Int): Int {
         val ym = YearMonth.of(year, month)
         return ym.lengthOfMonth()
+    }
+
+    private fun updateSelectedDateDisplay() {
+        val textView = view?.findViewById<android.widget.TextView>(R.id.textViewSelectedDate)
+        this.date?.let {
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+            textView?.text = it.format(formatter)
+        } ?: run {
+            textView?.text = ""
+        }
     }
 
 }

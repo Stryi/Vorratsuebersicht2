@@ -185,23 +185,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layoutDirection="rtl" >
+        android:gravity="center_vertical" >
 
-        <Button
-            android:id="@+id/buttonOk"
-            android:text="@string/App_Ok"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_green_light"
-            android:background="@android:color/transparent"
-            style="?android:attr/buttonBarButtonStyle"
+        <TextView
+            android:id="@+id/textViewSelectedDate"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_weight="1"
+            android:textColor="@color/Default_Text_Color"
+            android:textSize="22sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
         <Button
             android:id="@+id/buttonNoDate"
             android:text="@string/App_NoDate"
             android:textStyle="bold"
             android:textColor="@android:color/holo_red_light"
+            android:background="@android:color/transparent"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+        <Button
+            android:id="@+id/buttonOk"
+            android:text="@string/App_Ok"
+            android:textStyle="bold"
+            android:textColor="@android:color/holo_green_light"
             android:background="@android:color/transparent"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_height="wrap_content"
